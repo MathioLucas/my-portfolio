@@ -25,14 +25,14 @@ h1,h2,h3 {font-family:"Playfair Display",serif; letter-spacing:-.01em;}
 .nav-link:hover::after{width:100%;}
 
 /* ——— BACKGROUND PAINTING & PARALLAX ——— */
-.painting-bg{
-  background:url("/images/claude1.jpg")
-             center/cover no-repeat;
-  opacity:.14;                     /* keep text readable */
-  filter:grayscale(.35) blur(1px);
-  position:absolute; inset:0; z-index:-2;
 
-  /* slow Ken-Burns pan / zoom */
+.painting-bg{
+  background:url("/images/claude1") center/cover no-repeat;  /* or Wikimedia link */
+  opacity:.35;                 /* ← much stronger */
+  filter:grayscale(.15) blur(0.5px);
+  position:absolute; inset:0; z-index:-1;   /* was -2 */
+
+  /* Slow Ken-Burns drift */
   animation:bgDrift 55s ease-in-out infinite alternate;
   will-change:transform;
 }
