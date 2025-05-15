@@ -1,0 +1,17 @@
+---
+import Navbar from "../components/Navbar.astro";
+---
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>��Your Name | Portfolio</title>
+  </head>
+  <body class="flex flex-col min-h-screen">
+    <Navbar />
+    <main class="flex-grow"><slot /></main>
+    <footer class="text-center py-6 text-sm text-gray-500">
+      © {new Date().getFullYear()} 🟡Your Name
+    </footer>
+  </body>
+</html>

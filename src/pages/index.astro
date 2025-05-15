@@ -1,16 +1,16 @@
 ---
-
+import BaseLayout from "../layouts/BaseLayout.astro";
 ---
+<BaseLayout>
+  <section class="max-w-5xl mx-auto px-4 py-24 text-center">
+    <h1 class="text-4xl font-bold mb-4">Hi, I'm 🟡Your Name</h1>
+    <p class="text-lg mb-6">🟡One-sentence pitch.</p>
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+    <h2 class="text-2xl font-semibold mt-10 mb-3">Tech Stack</h2>
+    <ul class="inline-flex flex-wrap gap-3 justify-center">
+      <li class="px-3 py-1 bg-gray-200 rounded">TypeScript</li>
+      <li class="px-3 py-1 bg-gray-200 rounded">React</li>
+      <!-- add more -->
+    </ul>
+  </section>
+</BaseLayout>
