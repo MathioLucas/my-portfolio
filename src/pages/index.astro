@@ -1,99 +1,84 @@
 ---
-// src/pages/index.astro
 import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
-<!--  Google Font for Renaissance vibe  -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
 
 <style is:global>
-/* --------------  GENERAL -------------- */
-html {scroll-behavior:smooth;}
 body {@apply bg-[#f4efe9] text-slate-800;}
-h1, h2, h3 {font-family:"Playfair Display",serif; letter-spacing:-.01em;}
-/* --------------  HERO -------------- */
-.fresco-bg{
-  background:url("https://upload.wikimedia.org/wikipedia/commons/9/97/School_of_Athens.jpg")
-            center/cover no-repeat;
-  opacity:.15;              /* subtle! */
-  filter:grayscale(0.4) blur(2px);
+h1,h2,h3 {font-family:"Playfair Display",serif; letter-spacing:-.01em;}
+/* Background painting */
+.painting-bg{
+  background:url("https://upload.wikimedia.org/wikipedia/commons/7/7f/Sandro_Botticelli_-_La_Primavera_-_Google_Art_Project.jpg")
+             center/cover no-repeat;
+  opacity:.15; filter:grayscale(.4) blur(2px);
   position:absolute; inset:0; z-index:-1;
 }
+/* Logo */
+.logo{font-family:"Playfair Display",serif; font-weight:700;}
+/* Nav */
+.nav-link{@apply text-sm font-medium text-[#3c2f13] hover:text-[#c19e57] transition;}
+/* Hero */
 .hero-section{@apply relative min-h-screen flex flex-col items-center justify-center text-center px-6;}
-.hero-title { @apply text-5xl md:text-7xl font-black mb-6 text-[#3c2f13]; }
-.hero-sub   { @apply text-xl md:text-2xl max-w-2xl mx-auto mb-14 text-[#5d4c2a]; }
-/* --------------  GOLD DIVIDER -------------- */
-.divider{
-  background:url('data:image/svg+xml;utf8,\
-  <svg xmlns="http://www.w3.org/2000/svg" width="300" height="20" viewBox="0 0 300 20" fill="none" stroke="%23c19e57" stroke-width="2"><path d="M1 10H99M201 10H299"/><circle cx="150" cy="10" r="4" fill="%23c19e57" stroke="none"/><path d="M120 10c5-9 55-9 60 0"/></svg>')
-  center/contain no-repeat;
-  width:100%; height:20px; margin:3rem auto;
-}
-/* --------------  STACK CARDS -------------- */
+.hero-title{@apply text-5xl md:text-7xl font-black mb-6 text-[#3c2f13];}
+.hero-sub{@apply text-xl md:text-2xl max-w-2xl mx-auto mb-14 text-[#5d4c2a];}
+/* Buttons */
+.btn{@apply inline-block px-8 py-3 rounded-full font-semibold transition shadow-md cursor-pointer;}
+.btn-primary{@apply bg-[#c19e57] text-white hover:bg-[#d4b36e];}
+.btn-outline{@apply border border-[#c19e57] text-[#c19e57] hover:bg-[#c19e57] hover:text-white;}
+/* Cards */
 .card{@apply bg-white/70 backdrop-blur-sm border border-[#d9d1c4] rounded-xl p-6 md:p-8 shadow-lg;}
 .card h3{@apply font-semibold text-lg mb-2;}
-/* --------------  CTA BUTTONS -------------- */
-.btn{
-  @apply inline-block px-8 py-3 rounded-full font-semibold transition
-         shadow-md cursor-pointer;
-}
-.btn-primary{ @apply bg-[#c19e57] text-white hover:bg-[#d4b36e]; }
-.btn-outline{ @apply border border-[#c19e57] text-[#c19e57] hover:bg-[#c19e57] hover:text-white; }
+/* Divider */
+.divider{background:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="300" height="20" viewBox="0 0 300 20" fill="none" stroke="%23c19e57" stroke-width="2"><path d="M1 10H99M201 10H299"/><circle cx="150" cy="10" r="4" fill="%23c19e57"/><path d="M120 10c5-9 55-9 60 0"/></svg>') center/contain no-repeat; width:100%; height:20px; margin:3rem auto;}
 </style>
 
 <BaseLayout>
-  <!-- HERO -->
-  <section id="hero" class="hero-section">
-    <div class="fresco-bg"></div>
+  <!-- Header -->
+  <header class="w-full px-6 py-4 flex justify-between items-center">
+    <span class="logo text-2xl text-[#3c2f13]">Mathio&nbsp;Luca</span>
+    <nav class="flex gap-6">
+      <a class="nav-link" href="/projects">Projects</a>
+      <a class="nav-link" href="/contact">Contact</a>
+      <a class="nav-link" href="/resume.pdf" target="_blank">Résumé</a>
+    </nav>
+  </header>
 
-    <h1 class="hero-title">Mathio&nbsp;Luca</h1>
+  <!-- HERO -->
+  <section class="hero-section">
+    <div class="painting-bg"></div>
+
+    <h1 class="hero-title">Building Reliable&nbsp;Systems</h1>
     <p class="hero-sub">
-      Renaissance-minded software engineer crafting elegant algorithms and resilient systems that stand the test&nbsp;of&nbsp;time.
+      Software engineer focused on scalable back-end architecture, clean code, and data-driven products.
     </p>
 
-    <a href="#stack" class="btn btn-outline">Explore Craft&nbsp;→</a>
+    <div class="flex gap-6">
+      <a href="/projects" class="btn btn-primary">View Projects</a>
+      <a href="/contact"  class="btn btn-outline">Get in Touch</a>
+    </div>
   </section>
 
-  <!-- TECH STACK -->
+  <!-- STACK -->
   <section id="stack" class="py-24 px-6 max-w-6xl mx-auto">
     <div class="divider"></div>
-    <h2 class="text-3xl md:text-4xl font-bold text-center text-[#3c2f13] mb-14">Areas&nbsp;of&nbsp;Mastery</h2>
+    <h2 class="text-3xl md:text-4xl font-bold text-center text-[#3c2f13] mb-14">
+      Areas&nbsp;of&nbsp;Expertise
+    </h2>
 
     <div class="grid gap-10 md:gap-12 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-      <div class="card">
-        <h3>Modern Languages</h3>
-        <p>TypeScript, Go, Python, C++17—choosing the right tool for each intellectual quest.</p>
-      </div>
-      <div class="card">
-        <h3>Systems &amp; Back-End</h3>
-        <p>Event-driven micro-services, message queues, gRPC, high-throughput APIs, PostgreSQL &amp; Redis.</p>
-      </div>
-      <div class="card">
-        <h3>Cloud Orchestration</h3>
-        <p>AWS (Lambda, ECS, RDS), Docker, Terraform, GitHub Actions CI/CD for reproducible deployments.</p>
-      </div>
-      <div class="card">
-        <h3>Data &amp; AI</h3>
-        <p>Vector databases, embeddings, OpenAI API, statistical modelling—turning raw data into insight.</p>
-      </div>
-      <div class="card">
-        <h3>Testing &amp; Quality</h3>
-        <p>TDD, property-based tests, Playwright, chaos engineering—because robustness is beauty.</p>
-      </div>
-      <div class="card">
-        <h3>Human-Centric Design</h3>
-        <p>Accessible interfaces, DDD, clear documentation, mentoring—code that serves people.</p>
-      </div>
-    </div>
-
-    <div class="text-center mt-20">
-      <a href="/contact" class="btn btn-primary">Commission&nbsp;a&nbsp;Masterpiece</a>
+      <div class="card"><h3>Languages</h3><p>TypeScript, Go, Python, C++17.</p></div>
+      <div class="card"><h3>Back-End</h3><p>Event-driven micro-services, gRPC, REST APIs, PostgreSQL, Redis.</p></div>
+      <div class="card"><h3>Cloud</h3><p>AWS Lambda & ECS, Docker, Terraform, Vercel.</p></div>
+      <div class="card"><h3>Data &amp; AI</h3><p>Vector DBs, OpenAI API, data pipelines.</p></div>
+      <div class="card"><h3>Quality</h3><p>TDD, property-based testing, Playwright, CI/CD.</p></div>
+      <div class="card"><h3>Collaboration</h3><p>Agile practices, clear docs, mentoring.</p></div>
     </div>
   </section>
 
   <footer class="py-10 text-center text-sm text-[#5d4c2a]">
-    © {new Date().getFullYear()} Mathio&nbsp;Luca
+    © {new Date().getFullYear()} Mathio Luca
   </footer>
 </BaseLayout>
