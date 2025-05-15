@@ -42,20 +42,7 @@ h1,h2,h3 {font-family:"Playfair Display",serif; letter-spacing:-.01em;}
   100% {transform:scale(1.05) translate(2%, 3%);}
 }
 
-/* ——— SPARKLES OVERLAY ——— */
-.sparkles{
-  pointer-events:none; position:absolute; inset:0; z-index:-1;
-  background:
-    radial-gradient(circle at 20% 30%, rgba(255,223,130,.35) 0 2px, transparent 3px),
-    radial-gradient(circle at 70% 70%, rgba(255,223,130,.25) 0 1.5px, transparent 3px),
-    radial-gradient(circle at 40% 80%, rgba(255,223,130,.28) 0 1.8px, transparent 3px);
-  background-size:3px 3px,4px 4px,5px 5px;
-  animation:sparkleShift 12s linear infinite;
-}
-@keyframes sparkleShift{
-  from{background-position:0 0,0 0,0 0;}
-  to  {background-position:1000px 600px, -800px 400px, 600px -600px;}
-}
+
 
 /* ——— HERO ——— */
 .hero-section{@apply relative min-h-screen flex flex-col items-center justify-center text-center px-6;}
@@ -104,7 +91,7 @@ h1,h2,h3 {font-family:"Playfair Display",serif; letter-spacing:-.01em;}
   <!-- HERO -->
   <section class="hero-section">
     <div class="painting-bg"></div>
-    <div class="sparkles"></div>
+    
 
     <h1 class="hero-title">Building Reliable&nbsp;Systems</h1>
     <p class="hero-sub">
