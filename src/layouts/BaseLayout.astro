@@ -1,1 +1,24 @@
 
+---
+import Navbar from "../components/Navbar.astro";
+const year = new Date().getFullYear();
+---
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <slot name="head" />   <!-- extra <head> stuff per page -->
+  </head>
+
+  <body class="flex flex-col min-h-screen">
+    <Navbar />
+
+    <main class="flex-grow">
+      <slot />             <!-- page content -->
+    </main>
+
+    <footer class="py-6 text-center text-sm text-gray-500">
+      © {year} 🟡Your Name
+    </footer>
+  </body>
+</html>
