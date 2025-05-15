@@ -1,16 +1,78 @@
 ---
+// src/pages/index.astro
 import BaseLayout from "../layouts/BaseLayout.astro";
 ---
-<BaseLayout>
-  <section class="max-w-5xl mx-auto px-4 py-24 text-center">
-    <h1 class="text-4xl font-bold mb-4">Hi, I'm 🟡Your Name</h1>
-    <p class="text-lg mb-6">🟡One-sentence pitch.</p>
 
-    <h2 class="text-2xl font-semibold mt-10 mb-3">Tech Stack</h2>
-    <ul class="inline-flex flex-wrap gap-3 justify-center">
-      <li class="px-3 py-1 bg-gray-200 rounded">TypeScript</li>
-      <li class="px-3 py-1 bg-gray-200 rounded">React</li>
-      <!-- add more -->
-    </ul>
-  </section>
+<!-- Utility classes for the “pill” badges -->
+<style is:global>
+.badge {
+  @apply rounded px-3 py-1 text-sm font-medium
+    bg-white/10 border border-white/20
+    backdrop-blur-sm text-white whitespace-nowrap;
+}
+
+.animated-bg {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(130deg,#0ea5e9,#a855f7,#22d3ee,#e11d48);
+  background-size: 400% 400%;
+  animation: gradientShift 15s ease-in-out infinite;
+  filter: blur(120px);
+}
+
+@keyframes gradientShift {
+  0%   {background-position: 0% 50%;}
+  50%  {background-position: 100% 50%;}
+  100% {background-position: 0% 50%;}
+}
+</style>
+
+<BaseLayout>
+  <div class="relative overflow-hidden">
+    <!-- animated gradient back-layer -->
+    <div class="animated-bg"></div>
+
+    <section class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-36 text-center text-white">
+      <!-- HERO -->
+      <h1 class="text-5xl sm:text-6xl font-extrabold leading-tight mb-6">
+        Hi, I’m <span class="text-emerald-300">Mathio&nbsp;Luca</span>
+      </h1>
+
+      <p class="text-xl sm:text-2xl font-medium mb-12 max-w-3xl mx-auto">
+        I turn ambitious ideas into performant, pixel-perfect web experiences that captivate users and accelerate business growth.
+      </p>
+
+      <!-- TECH STACK -->
+      <h2 class="text-2xl sm:text-3xl font-semibold mb-6">Tech&nbsp;Stack</h2>
+
+      <ul class="inline-flex flex-wrap justify-center gap-3 md:gap-4 max-w-4xl mx-auto">
+        <li class="badge">TypeScript</li>
+        <li class="badge">JavaScript&nbsp;(ESNext)</li>
+        <li class="badge">React&nbsp;&amp;&nbsp;Next.js</li>
+        <li class="badge">Astro</li>
+        <li class="badge">Tailwind&nbsp;CSS</li>
+        <li class="badge">Node.js</li>
+        <li class="badge">GraphQL</li>
+        <li class="badge">Prisma&nbsp;/&nbsp;PostgreSQL</li>
+        <li class="badge">Serverless&nbsp;(AWS&nbsp;Lambda & Vercel)</li>
+        <li class="badge">Docker</li>
+        <li class="badge">CI/CD&nbsp;(GitHub&nbsp;Actions)</li>
+        <li class="badge">Playwright&nbsp;Testing</li>
+      </ul>
+
+      <!-- CALLS TO ACTION -->
+      <div class="mt-16 flex flex-wrap items-center justify-center gap-6">
+        <a href="/projects"
+           class="px-6 py-3 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-gray-900 font-semibold transition shadow-md">
+          View Projects
+        </a>
+
+        <a href="/contact"
+           class="px-6 py-3 rounded-lg border border-white/40 hover:bg-white/10 font-semibold transition">
+          Get in Touch
+        </a>
+      </div>
+    </section>
+  </div>
 </BaseLayout>
