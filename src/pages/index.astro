@@ -1,4 +1,6 @@
-
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -71,3 +73,66 @@ h1,h2,h3 {font-family:"Playfair Display",serif; letter-spacing:-.01em;}
 }
 </style>
 
+<BaseLayout>
+  <!-- HEADER -->
+  <header class="w-full px-6 py-4 flex justify-between items-center">
+    <span class="logo text-2xl text-[var(--ink)]">Mathio&nbsp;Luca</span>
+    <nav class="flex gap-6">
+      <a class="nav-link" href="/projects">Projects</a>
+      <a class="nav-link" href="/contact">Contact</a>
+      <a class="nav-link" href="/resume.pdf" target="_blank">Résumé</a>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero-section">
+    <div class="painting-bg"></div>
+    <div class="sparkles"></div>
+
+    <h1 class="hero-title">Building Reliable&nbsp;Systems</h1>
+    <p class="hero-sub">
+      Software engineer focused on scalable back-end architecture, clean code, and data-driven products.
+    </p>
+
+    <div class="flex gap-6">
+      <a href="/projects" class="btn btn-primary">View Projects</a>
+      <a href="/contact"  class="btn btn-outline">Get in Touch</a>
+    </div>
+  </section>
+
+  <!-- STACK -->
+  <section id="stack" class="py-24 px-6 max-w-6xl mx-auto">
+    <div class="divider"></div>
+    <h2 class="text-3xl md:text-4xl font-bold text-center text-[var(--ink)] mb-14">
+      Areas&nbsp;of&nbsp;Expertise
+    </h2>
+
+    <div class="grid gap-10 md:gap-12 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+      <div class="card"><h3>Languages</h3><p>TypeScript, Go, Python, C++17.</p></div>
+      <div class="card"><h3>Back-End</h3><p>Event-driven micro-services, gRPC, REST APIs, PostgreSQL, Redis.</p></div>
+      <div class="card"><h3>Cloud</h3><p>AWS Lambda &amp; ECS, Docker, Terraform, Vercel.</p></div>
+      <div class="card"><h3>Data &amp; AI</h3><p>Vector DBs, OpenAI API, data pipelines.</p></div>
+      <div class="card"><h3>Quality</h3><p>TDD, property-based testing, Playwright, CI/CD.</p></div>
+      <div class="card"><h3>Collaboration</h3><p>Agile practices, clear docs, mentoring.</p></div>
+    </div>
+  </section>
+
+  <footer class="py-10 text-center text-sm text-[#5d4c2a]">
+    © {new Date().getFullYear()} Mathio&nbsp;Luca
+  </footer>
+
+  <!-- PARALLAX SCRIPT -->
+  <script is:inline>
+    const bg = document.querySelector('.painting-bg');
+    let rect;
+    window.addEventListener('resize', () => {
+      rect = bg.getBoundingClientRect();
+    });
+    window.addEventListener('mousemove', (e) => {
+      rect = rect || bg.getBoundingClientRect();
+      const x = (e.clientX - rect.width / 2) / rect.width;
+      const y = (e.clientY - rect.height / 2) / rect.height;
+      bg.style.transform = `translate(${x * 30}px, ${y * 30}px) scale(1.05)`;
+    });
+  </script>
+</BaseLayout>
