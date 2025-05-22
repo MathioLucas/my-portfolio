@@ -1,8 +1,21 @@
 {
   "version": 2,
   "routes": [
-    { "src": "/LucaMMathioResume.pdf", "dest": "/LucaMMathioResume.pdf" },
-    { "handle": "filesystem" },
-    { "src": "/(.*)", "dest": "/index.html" }
+    {
+      "src": "/LucaMMathioResume.pdf",
+      "dest": "/LucaMMathioResume.pdf",
+      "headers": { "content-type": "application/pdf" }
+    },
+    { 
+      "handle": "filesystem" 
+    },
+    { 
+      "src": "/resume", 
+      "dest": "/resume/index.html"
+    },
+    { 
+      "src": "/(.*)", 
+      "dest": "/$1"
+    }
   ]
 }
