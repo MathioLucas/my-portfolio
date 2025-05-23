@@ -7,39 +7,43 @@ const projects = [
     title: "PowerSage Analyzer",
     description: "Real-time dashboard that analyzes household power usage and flags inefficiencies.",
     demo: "https://xc4gpf.csb.app/",
-    repo: "https://github.com/MathioLucas/PowerSageAnaylzer"
+    repo: "https://github.com/MathioLucas/PowerSageAnaylzer",
+    screenshot: "/screenshots/Logistics.png"
   },
   {
     title: "Molecular Explorer",
-    description: "Browser-based 3-D tool for exploring and annotating molecule structures in seconds.",
+    description: "Browser tool for exploring and annotating molecule structures in 3-D.",
     demo: "https://zg4l68-4322.csb.app/gallery",
-    repo: "https://github.com/MathioLucas/Molecular_explorer"
+    repo: "https://github.com/MathioLucas/Molecular_explorer",
+    screenshot: "/screenshots/Molecule.png"
+  },
+  {
+    title: "Google Demo",
+    description: "A pixel-perfect Google home page clone with a working search bar and responsive layout.",
+    demo: "https://z9tqg6-5173.csb.app/",
+    repo: "https://github.com/MathioLucas/GoogleDemo",
+    screenshot: "/screenshots/Google.png"
   }
 ];
 ---
 
 <BaseLayout>
   <section class="relative min-h-screen flex flex-col items-center px-6 py-20">
-    <!-- animated texture (re-uses the dark tech background) -->
     <div class="painting-bg absolute inset-0 -z-10"></div>
 
-    <!-- headline -->
     <h1 class="text-4xl md:text-5xl font-black text-[#c19e57] drop-shadow-sm mb-3">
       Featured&nbsp;Projects
     </h1>
     <p class="text-lg md:text-xl text-white/80 mb-12 text-center max-w-2xl">
-      A hand-picked selection of things I’ve been building lately.
       Hover a card to preview and grab the source.
     </p>
 
-    <!-- project grid -->
     <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 w-full max-w-6xl">
       {projects.map(p => <ProjectCard {...p} />)}
     </div>
   </section>
 
   <style>
-  /* same dark / grid background we used on the contact page */
   .painting-bg{
     position:absolute; inset:0;
     background:radial-gradient(120% 120% at 30% 20%, #1f2736 0%, #0f121b 50%, #000 100%);
@@ -51,10 +55,8 @@ const projects = [
       linear-gradient(90deg,transparent 95%, rgba(255,255,255,.06) 100%);
     background-size:3rem 3rem;
     mix-blend-mode:overlay;
-    animation: gridMove 60s linear infinite;
+    animation:gridMove 60s linear infinite;
   }
-  @keyframes gridMove{
-    to{transform:translate3d(-3rem,-3rem,0);}
-  }
+  @keyframes gridMove{to{transform:translate3d(-3rem,-3rem,0);}}
   </style>
 </BaseLayout>
