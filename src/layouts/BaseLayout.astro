@@ -9,8 +9,7 @@
 */
 const { title, description, demo, repo, screenshot } = Astro.props;
 // Fallback screenshot (only used if you omit the prop)
-const preview =
-  screenshot ?? `https://image.thum.io/get/width/900/crop/675/noanimate/${encodeURIComponent(demo)}`;
+const preview = screenshot ?? (demo ? `https://image.thum.io/get/width/900/crop/675/noanimate/${encodeURIComponent(demo)}` : '');
 ---
 <a
   href={demo}
