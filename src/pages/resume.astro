@@ -6,24 +6,53 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   <section class="max-w-3xl mx-auto py-20">
     <h2 class="text-3xl font-bold text-center mb-6">Resume</h2>
 
-    <!-- Direct download and open link -->
+    <!-- Force download with JavaScript as fallback -->
     <div class="text-center space-y-4">
       <a 
-        href="https://mathiolucas-8mdfee1i4-mathiolucas-projects.vercel.app/lucaMMathioResume.pdf" 
-        download
+        href="/lucaMMathioResume.pdf"
+        download="Lucas_Mathio_Resume.pdf"
         class="px-6 py-3 bg-blue-600 text-white rounded hover:bg-blue-700 inline-block"
+        onclick="downloadResume(event)"
       >
         Download PDF
       </a>
       <br />
       <a 
-        href="https://mathiolucas-8mdfee1i4-mathiolucas-projects.vercel.app/lucaMMathioResume.pdf" 
-        target="_blank"
-        rel="noopener noreferrer"
+        href="/lucaMMathioResume.pdf" 
+        download="Lucas_Mathio_Resume.pdf"
         class="text-blue-600 underline"
+        onclick="downloadResume(event)"
       >
-        View in New Tab
+        View Resume
       </a>
     </div>
+
+    <script>
+      // This function ensures the PDF will always download instead of opening in browser
+      function downloadResume(e) {
+        e.preventDefault();
+        
+        const pdfUrl = "https://mathiolucas-8mdfee1i4-mathiolucas-projects.vercel.app/lucaMMathioResume.pdf";
+        const fileName = "Lucas_Mathio_Resume.pdf";
+        
+        fetch(pdfUrl)
+          .then(response => response.blob())
+          .then(blob => {
+            const blobUrl = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.style.display = 'none';
+            a.href = blobUrl;
+            a.download = fileName;
+            document.body.appendChild(a);
+            a.click();
+            window.URL.revokeObjectURL(blobUrl);
+          })
+          .catch(error => {
+            console.error('Error downloading the file:', error);
+            // Fallback - open in new tab if download fails
+            window.open(pdfUrl, '_blank');
+          });
+      }
+    </script>
   </section>
 </BaseLayout>
