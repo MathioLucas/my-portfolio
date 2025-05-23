@@ -85,7 +85,7 @@ const year = new Date().getFullYear();
       <nav class="flex gap-6">
         <a class="nav-link" href="/projects/">Projects</a>
         <a class="nav-link" href="/contact/">Contact</a>
-        <a class="nav-link" href="#" onclick="downloadResume(event)"> Resume </a>
+        <a class="nav-link" href="https://mathiolucas-8mdfee1i4-mathiolucas-projects.vercel.app/lucaMMathioResume.pdf" id="resume-link">Résumé download </a>
       </nav>
     </header>
 
@@ -140,5 +140,28 @@ const year = new Date().getFullYear();
         bg.style.transform = `translate(${x * 30}px, ${y * 30}px) scale(1.05)`;
       });
     </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js" integrity="sha512-Qlv6VSKh1gDKGoJbnyA5RMXYcvnpIqhO++MhIM2fStMcGT9i2T//tSwYFlcyoRRDcDZ+TYHpH8azBBCyhpSeqw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script>
+  document.getElementById('resume-link').addEventListener('click', function(e) {
+    e.preventDefault();
+    
+    const pdfUrl = "https://mathiolucas-8mdfee1i4-mathiolucas-projects.vercel.app/lucaMMathioResume.pdf";
+    const fileName = "Lucas_Mathio_Resume.pdf";
+    
+    // Try using FileSaver.js
+    if (window.saveAs) {
+      try {
+        saveAs(pdfUrl, fileName);
+        return;
+      } catch (e) {
+        console.log("FileSaver.js failed", e);
+      }
+    }
+    
+    // Fallback to a new window with the file
+    window.open(pdfUrl, '_blank');
+  });
+</script>
   </body>
 </html>
