@@ -1,34 +1,48 @@
 ---
+/*
+  Props:
+    title        – project name
+    description  – one-liner
+    demo         – URL users visit when they click the card
+    repo         – GitHub repository URL
+    screenshot   – local or remote image URL
+*/
 const { title, description, demo, repo, screenshot } = Astro.props;
-const preview = screenshot ??
-  `https://image.thum.io/get/width/900/crop/675/noanimate/${encodeURIComponent(demo)}`;
+
+// Fallback screenshot (only used if you omit the prop)
+const preview =
+  screenshot ?? `https://image.thum.io/get/width/900/crop/675/noanimate/${encodeURIComponent(demo)}`;
 ---
 <a
   href={demo}
   target="_blank"
   rel="noopener noreferrer"
-  class="group block relative aspect-video rounded-xl overflow-hidden
+  class="group relative block aspect-video rounded-xl overflow-hidden
          shadow-xl ring-1 ring-white/10 hover:ring-[#c19e57]/60 transition"
 >
+  <!-- static thumbnail ------------------------------------------------- -->
   <img
     src={preview}
-    alt={title + ' preview'}
+    alt={`${title} preview`}
     loading="lazy"
     class="absolute inset-0 w-full h-full object-cover object-top
-           transition duration-300 group-hover:blur-[2px]"
+           transition duration-300 group-hover:blur-[2px] group-hover:scale-105"
   />
 
+  <!-- hover overlay ---------------------------------------------------- -->
   <div
-    class="absolute inset-0 flex flex-col justify-between p-4
+    class="absolute inset-0 z-10 flex flex-col justify-between p-4
            bg-black/60 opacity-0 group-hover:opacity-100
-           transition duration-300"
+           transition-opacity duration-300 pointer-events-none"
   >
-    <a  href={repo}
-        target="_blank"
-        rel="noopener noreferrer"
-        class="self-end p-2 bg-white/10 rounded-full
-               hover:bg-white/20 transition"
-        onClick={(e)=>e.stopPropagation()}
+    <!-- GitHub badge -->
+    <a
+      href={repo}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="self-end p-2 bg-white/10 rounded-full
+             hover:bg-white/20 transition pointer-events-auto"
+      onClick={(e)=>e.stopPropagation()}   /* keep parent link intact */
     >
       <svg class="w-5 h-5 text-[#c19e57]" viewBox="0 0 24 24" fill="currentColor">
         <path d="M12 .3A12 12 0 0 0 0 12a12 12 0 0 0 8.21 11.44c.6.12.82-.25.82-.57
@@ -43,7 +57,8 @@ const preview = screenshot ??
       </svg>
     </a>
 
-    <div>
+    <!-- title + description -->
+    <div class="pointer-events-none">
       <h3 class="text-lg font-bold text-white mb-1">{title}</h3>
       <p class="text-sm text-white/80">{description}</p>
     </div>
