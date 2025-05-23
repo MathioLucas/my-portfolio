@@ -2,24 +2,34 @@
 import BaseLayout  from "../layouts/BaseLayout.astro";
 import ProjectCard from "../components/ProjectCard.astro";
 
-/* Edit / extend freely */
 const projects = [
-  { title: "🟡 Project One", description: "What it does.",   tech: ["React","Node"], link: "https://xc4gpf.csb.app/" },
-  { title: "🟡 Project Two", description: "Why it matters.", tech: ["Python"],       link: "https://zg4l68-4322.csb.app/gallery" },
+  {
+    title: "PowerSage Analyzer",
+    description: "Real-time dashboard that analyzes household power usage and flags inefficiencies.",
+    demo: "https://xc4gpf.csb.app/",
+    repo: "https://github.com/MathioLucas/PowerSageAnaylzer"
+  },
+  {
+    title: "Molecular Explorer",
+    description: "Browser-based 3-D tool for exploring and annotating molecule structures in seconds.",
+    demo: "https://zg4l68-4322.csb.app/gallery",
+    repo: "https://github.com/MathioLucas/Molecular_explorer"
+  }
 ];
 ---
+
 <BaseLayout>
   <section class="relative min-h-screen flex flex-col items-center px-6 py-20">
-    <!-- textured background -->
+    <!-- animated texture (re-uses the dark tech background) -->
     <div class="painting-bg absolute inset-0 -z-10"></div>
 
     <!-- headline -->
-    <h1 class="text-4xl md:text-5xl font-black text-[#3c2f13] drop-shadow-sm mb-3">
+    <h1 class="text-4xl md:text-5xl font-black text-[#c19e57] drop-shadow-sm mb-3">
       Featured&nbsp;Projects
     </h1>
-    <p class="text-lg md:text-xl text-[#3c2f13]/90 mb-12 text-center max-w-2xl">
-      A hand-picked selection of things I’ve been building lately.<br/>
-      Hover a card to learn more!
+    <p class="text-lg md:text-xl text-white/80 mb-12 text-center max-w-2xl">
+      A hand-picked selection of things I’ve been building lately.
+      Hover a card to preview and grab the source.
     </p>
 
     <!-- project grid -->
@@ -27,11 +37,24 @@ const projects = [
       {projects.map(p => <ProjectCard {...p} />)}
     </div>
   </section>
-</BaseLayout>
 
-<style>
-.painting-bg{
-  background:url('/path/to/your/painting-texture.jpg') center/cover;
-  filter:brightness(.95);
-}
-</style>
+  <style>
+  /* same dark / grid background we used on the contact page */
+  .painting-bg{
+    position:absolute; inset:0;
+    background:radial-gradient(120% 120% at 30% 20%, #1f2736 0%, #0f121b 50%, #000 100%);
+  }
+  .painting-bg::after{
+    content:""; position:absolute; inset:0; pointer-events:none;
+    background-image:
+      linear-gradient(transparent 95%, rgba(255,255,255,.06) 100%),
+      linear-gradient(90deg,transparent 95%, rgba(255,255,255,.06) 100%);
+    background-size:3rem 3rem;
+    mix-blend-mode:overlay;
+    animation: gridMove 60s linear infinite;
+  }
+  @keyframes gridMove{
+    to{transform:translate3d(-3rem,-3rem,0);}
+  }
+  </style>
+</BaseLayout>
