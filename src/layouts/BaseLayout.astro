@@ -8,7 +8,6 @@
     screenshot   – local or remote image URL
 */
 const { title, description, demo, repo, screenshot } = Astro.props;
-
 // Fallback screenshot (only used if you omit the prop)
 const preview =
   screenshot ?? `https://image.thum.io/get/width/900/crop/675/noanimate/${encodeURIComponent(demo)}`;
@@ -28,7 +27,6 @@ const preview =
     class="absolute inset-0 w-full h-full object-cover object-top
            transition duration-300 group-hover:blur-[2px] group-hover:scale-105"
   />
-
   <!-- hover overlay ---------------------------------------------------- -->
   <div
     class="absolute inset-0 z-10 flex flex-col justify-between p-4
@@ -42,7 +40,7 @@ const preview =
       rel="noopener noreferrer"
       class="self-end p-2 bg-white/10 rounded-full
              hover:bg-white/20 transition pointer-events-auto"
-      onClick={(e)=>e.stopPropagation()}   /* keep parent link intact */
+      onclick="event.stopPropagation()"
     >
       <svg class="w-5 h-5 text-[#c19e57]" viewBox="0 0 24 24" fill="currentColor">
         <path d="M12 .3A12 12 0 0 0 0 12a12 12 0 0 0 8.21 11.44c.6.12.82-.25.82-.57
@@ -56,7 +54,6 @@ const preview =
                  12 12 0 0 0 12 .3Z"/>
       </svg>
     </a>
-
     <!-- title + description -->
     <div class="pointer-events-none">
       <h3 class="text-lg font-bold text-white mb-1">{title}</h3>
