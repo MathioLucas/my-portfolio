@@ -7,7 +7,7 @@ const links = [
   { href: "/contact/",  label: "Contact"  },
 ];
 
-/* Which link is “active”?  */
+/* Detect active link */
 const current = Astro.url.pathname;
 ---
 
@@ -57,7 +57,12 @@ const current = Astro.url.pathname;
        Layout container
     ------------------------------------------------------------ */
     .navbar{
-      @apply sticky top-0 z-50 w-full backdrop-blur-sm bg-[var(--parch)]/80 border-b border-[#decfb5]/60 shadow-sm;
+      /* custom colours done with plain CSS ↓ */
+      background-color: var(--parch);
+      border-color: rgba(222,207,181,.6);
+
+      @apply sticky top-0 z-50 w-full backdrop-blur-sm
+             bg-opacity-80 border-b shadow-sm;
     }
     .nav-container{
       @apply max-w-6xl mx-auto px-6 py-3 flex items-center justify-between;
@@ -78,14 +83,12 @@ const current = Astro.url.pathname;
     .nav-link{
       @apply relative text-sm font-medium text-[var(--ink)] transition-colors;
     }
-    /* Gradient underline */
     .nav-link::after{
       content:"";position:absolute;left:0;bottom:-2px;width:0;height:2px;
       background:linear-gradient(90deg,var(--gold),var(--ink));
       transition:width .35s cubic-bezier(.4,0,.2,1);
     }
     .nav-link:hover::after{ width:100%; }
-    /* Active page highlight */
     .list-active{ color:var(--gold); }
 
     /* ------------------------------------------------------------
@@ -95,7 +98,6 @@ const current = Astro.url.pathname;
     .hamburger span{
       @apply block h-[3px] w-full bg-[var(--ink)] rounded transition-transform;
     }
-    /* Animation when open */
     .hamburger.open span:nth-child(1){ @apply translate-y-[6px] rotate-45 bg-[var(--gold)]; }
     .hamburger.open span:nth-child(2){ @apply opacity-0; }
     .hamburger.open span:nth-child(3){ @apply -translate-y-[6px] -rotate-45 bg-[var(--gold)]; }
@@ -104,31 +106,31 @@ const current = Astro.url.pathname;
        Mobile drop-down
     ------------------------------------------------------------ */
     .mobile-menu{
-      @apply md:hidden flex flex-col gap-4 bg-[var(--parch)]/95 px-6 pb-6 pt-3;
-      max-height:0;overflow:hidden;transition:max-height .4s ease;
-    }
-    .mobile-menu.open{ max-height:260px; }    /* enough for 4 links */
+      background-color: var(--parch);
 
-    .mobile-link{
-      @apply text-[var(--ink)] font-medium;
+      @apply md:hidden flex flex-col gap-4 px-6 pb-6 pt-3
+             bg-opacity-95 max-h-0 overflow-hidden
+             transition-[max-height] duration-400 ease-linear;
     }
+    .mobile-menu.open{ max-height:260px; }
+
+    .mobile-link{ @apply text-[var(--ink)] font-medium; }
     .mobile-link.list-active{ @apply text-[var(--gold)]; }
-
   </style>
 
   <!-- ——— SCRIPT ——— -->
   <script is:inline>
-    const burger  = document.getElementById('hamburger');
-    const menu    = document.getElementById('mobile-menu');
+    const burger = document.getElementById('hamburger');
+    const menu   = document.getElementById('mobile-menu');
 
     burger?.addEventListener('click', () => {
       burger.classList.toggle('open');
       menu.classList.toggle('open');
     });
 
-    /* Close menu after navigation on mobile */
-    menu?.querySelectorAll('a').forEach(a=>{
-      a.addEventListener('click', ()=> {
+    /* Close menu after a link is clicked on mobile */
+    menu?.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
         burger.classList.remove('open');
         menu.classList.remove('open');
       });
