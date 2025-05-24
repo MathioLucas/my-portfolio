@@ -48,40 +48,45 @@ const current = Astro.url.pathname;
     ))}
   </ul>
 
-  <!---------------------------  STYLES  --------------------------->
   <style is:global>
-    /* ====== Shell ====== */
+    /* ====== shell ====== */
     .navbar{
-      position:sticky;top:0;z-index:50;
-      background:rgba(var(--parch-rgb),.80);          /* var created below */
+      position:sticky;     /* keeps bar on-screen */
+      top:0;
+      z-index:50;
+      position:relative;   /* ↤ so the dropdown positions against it */
+      background:rgba(var(--parch-rgb),.80);
       backdrop-filter:blur(6px);
       border-bottom:1px solid rgba(222,207,181,.6);
       box-shadow:0 1px 2px rgba(0,0,0,.05);
     }
     .nav-container{@apply max-w-6xl mx-auto px-6 py-3 flex items-center justify-between;}
 
-    /* ====== Logo ====== */
+    /* ====== logo ====== */
     .logo{font-family:"Playfair Display",serif;@apply text-xl md:text-2xl font-bold text-[var(--ink)];}
 
-    /* ====== Desktop links ====== */
-    .links{@apply hidden gap-8 items-center;}
+    /* ====== desktop links ====== */
+    .links{ @apply gap-8 items-center; }           /* ← NO ‘hidden’ */
     .nav-link{@apply relative text-sm font-medium text-[var(--ink)];}
-    .nav-link::after{content:"";@apply absolute left-0 -bottom-0.5 h-0.5 w-0;
+    .nav-link::after{
+      content:"";@apply absolute left-0 -bottom-0.5 h-0.5 w-0;
       background:linear-gradient(90deg,var(--gold),var(--ink));
-      transition:width .35s;}
+      transition:width .35s;
+    }
     .nav-link:hover::after{width:100%;}
     .list-active{color:var(--gold);}
 
-    /* ====== Hamburger ====== */
+    /* ====== hamburger ====== */
     .hamburger{@apply flex flex-col justify-between w-6 h-5;}
     .hamburger span{@apply block h-[3px] w-full bg-[var(--ink)] rounded transition-transform;}
     .hamburger.open span:nth-child(1){@apply translate-y-[6px] rotate-45 bg-[var(--gold)];}
     .hamburger.open span:nth-child(2){@apply opacity-0;}
     .hamburger.open span:nth-child(3){@apply -translate-y-[6px] -rotate-45 bg-[var(--gold)];}
 
-    /* ====== Mobile dropdown ====== */
+    /* ====== mobile dropdown ====== */
     .mobile-menu{
       position:absolute;left:0;top:100%;width:100%;
+      z-index:40;                               /* sits over page */
       background:rgba(var(--parch-rgb),.95);
       transform-origin:top;
       transform:scaleY(0);
@@ -93,7 +98,6 @@ const current = Astro.url.pathname;
     .mobile-link.list-active{@apply text-[var(--gold)];}
   </style>
 
-  <!---------------------------  SCRIPT  --------------------------->
   <script is:inline>
     const burger=document.getElementById('hamburger');
     const menu  =document.getElementById('mobile-menu');
