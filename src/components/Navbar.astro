@@ -106,16 +106,15 @@ const current = Astro.url.pathname;
        Mobile drop-down
     ------------------------------------------------------------ */
     .mobile-menu{
-      background-color: var(--parch);
+  background-color: var(--parch);
 
-      @apply md:hidden flex flex-col gap-4 px-6 pb-6 pt-3
-             bg-opacity-95 max-h-0 overflow-hidden
-             transition-[max-height] duration-400 ease-linear;
-    }
-    .mobile-menu.open{ max-height:260px; }
-
-    .mobile-link{ @apply text-[var(--ink)] font-medium; }
-    .mobile-link.list-active{ @apply text-[var(--gold)]; }
+  @apply md:hidden flex flex-col gap-4 px-6 pb-6 pt-3
+         bg-opacity-95 max-h-0 overflow-hidden
+         transition-all duration-300 ease-linear;
+  /* Only animate max-height */
+  transition-property: max-height;
+}
+.mobile-menu.open{ max-height:260px; }    /* enough for 4 links */
   </style>
 
   <!-- ——— SCRIPT ——— -->
