@@ -4,11 +4,13 @@
     title        – <title> text
     description  – meta description
     ogImage      – open-graph / twitter image
+    backHref     – where the Home/Back button should go (default "/")
 */
 const {
   title        = "Your Name | Portfolio",
   description  = "Personal portfolio built with Astro ✨",
   ogImage,
+  backHref     = "/",
 } = Astro.props;
 
 const year = new Date().getFullYear();
@@ -30,13 +32,25 @@ const year = new Date().getFullYear();
       </>
     )}
 
-    <!-- Example webfont (optional) -->
+    <!-- Example web-font (optional) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
   </head>
 
   <body class="bg-[#0d0d0d] text-gray-100 flex flex-col min-h-screen">
+
+    <!-- Back / Home button -->
+    <a
+      href={backHref}
+      class="fixed top-4 left-4 z-50 flex items-center gap-1 rounded-full bg-white/5 px-3 py-1.5 text-sm text-gray-300 backdrop-blur transition hover:text-[#c19e57] hover:bg-white/10"
+    >
+      <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
+        <path fill-rule="evenodd" d="M7.707 14.707a1 1 0 0 1-1.414 0l-5-5a1 1 0 0 1 0-1.414l5-5A1 1 0 0 1 7.707 4.293L4.414 7.586H18a1 1 0 1 1 0 2H4.414l3.293 3.293a1 1 0 0 1 0 1.414z" clip-rule="evenodd"/>
+      </svg>
+      Home
+    </a>
+
     <!-- Main content -->
     <main class="flex-grow container mx-auto px-4 py-10">
       <slot />
