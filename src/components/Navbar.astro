@@ -104,7 +104,11 @@ const current = Astro.url.pathname;
     }
     .mobile-menu.open{ transform:scaleY(1); }
     .mobile-link{@apply text-[var(--ink)] font-medium;}
-    .mobile-link.list-active{ color:var(--nav-gold); }
+.mobile-link{
+  color:#FFD860 !important;   /* ultra-bright gold */
+  font-weight:500;
+}
+.mobile-link.list-active{ color:#FFD860 !important; }
   </style>
 
   <script is:inline>
