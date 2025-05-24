@@ -1,167 +1,253 @@
----
-/*  Astro front-matter  */
+/* --- Astro front-matter ---------------------------------------------- */
 const year = new Date().getFullYear();
----
+/* --------------------------------------------------------------------- */
 
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Mathio Luca | Portfolio</title>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Mathio Luca | Portfolio</title>
 
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
 
-    <!-- Global styles -->
-    <style is:global>
-      /* ——— PALETTE ——— */
-      :root { --gold:#c19e57; --ink:#3c2f13; --parch:#f4efe9; }
-
-      body {@apply bg-[var(--parch)] text-slate-800;}
-      h1,h2,h3 {font-family:"Playfair Display",serif; letter-spacing:-.01em;}
-
-      /* ——— HEADER ——— */
-      .logo      {font-family:"Playfair Display",serif; font-weight:700;}
-      .nav-link  {@apply relative text-sm font-medium text-[var(--ink)] transition;}
-      .nav-link::after{
-        content:""; position:absolute; left:0; bottom:-2px; width:0; height:2px;
-        background:var(--gold); transition:width .3s;
-      }
-      .nav-link:hover::after{width:100%;}
-
-      /* ——— BACKGROUND PAINTING & PARALLAX ——— */
-      .painting-bg{
-        background:url("/images/claude1.jpg") center/cover no-repeat;
-        opacity:.35; filter:grayscale(.15) blur(0.5px);
-        position:absolute; inset:0; z-index:-1;
-        animation:bgDrift 55s ease-in-out infinite alternate;
-      }
-      @keyframes bgDrift{
-        0%   {transform:scale(1.05) translate(0%, 0%);}
-        50%  {transform:scale(1.12) translate(-3%, -4%);}
-        100% {transform:scale(1.05) translate( 2%, 3%);}
-      }
-
-      /* ——— HERO ——— */
-      .hero-section{@apply relative min-h-screen flex flex-col items-center justify-center text-center px-6;}
-      .hero-title{
-        @apply text-5xl md:text-7xl font-black mb-6;
-        color:transparent;background:linear-gradient(90deg,var(--ink),var(--gold));
-        -webkit-background-clip:text;background-clip:text;
-        animation:shine 6s ease-in-out infinite alternate;
-      }
-      @keyframes shine{from{background-position:0% 50%;} to{background-position:100% 50%;}}
-      .hero-sub{@apply text-xl md:text-2xl max-w-2xl mx-auto mb-14 text-[#5d4c2a];}
-
-      /* ——— BUTTONS ——— */
-      .btn{@apply inline-block px-8 py-3 rounded-full font-semibold transition shadow-md cursor-pointer;}
-      .btn-primary{@apply bg-[var(--gold)] text-white hover:bg-[#d4b36e];}
-      .btn-outline {@apply border border-[var(--gold)] text-[var(--gold)] hover:bg-[var(--gold)] hover:text-white;}
-
-      /* ——— CARDS ——— */
-      .card{
-        @apply bg-white/70 backdrop-blur-sm border border-[#d9d1c4] rounded-xl p-6 md:p-8 shadow-lg transition-transform duration-300;
-      }
-      .card:hover{transform:translateY(-6px) rotateX(3deg) rotateY(-2deg);}
-      .card h3{@apply font-semibold text-lg mb-2;}
-
-      /* ——— DIVIDER ——— */
-      .divider{
-        background:url('data:image/svg+xml;utf8,\
-          <svg xmlns="http://www.w3.org/2000/svg" width="300" height="20" viewBox="0 0 300 20" fill="none" stroke="%23c19e57" stroke-width="2"><path d="M1 10H99M201 10H299"/><circle cx="150" cy="10" r="4" fill="%23c19e57"/><path d="M120 10c5-9 55-9 60 0"/></svg>'
-        ) center/contain no-repeat;
-        width:100%; height:20px; margin:3rem auto;
-      }
-    </style>
-  </head>
-
-  <body class="flex flex-col min-h-screen">
-    <!-- CUSTOM HEADER (single instance) -->
-    <header class="w-full px-6 py-4 flex justify-between items-center">
-      <span class="logo text-2xl text-[var(--ink)]">Mathio&nbsp;Luca</span>
-      <nav class="flex gap-6">
-        <a class="nav-link" href="/projects/">Projects</a>
-        <a class="nav-link" href="/contact/">Contact</a>
-        <a class="nav-link" href="https://mathiolucas-8mdfee1i4-mathiolucas-projects.vercel.app/lucaMMathioResume.pdf" id="resume-link"> Resume </a>
-      </nav>
-    </header>
-
-    <main class="flex-grow">
-      <!-- HERO -->
-      <section class="hero-section">
-        <div class="painting-bg"></div>
-
-        <h1 class="hero-title">Building&nbsp;Reliable&nbsp;Systems</h1>
-        <p class="hero-sub">
-          👋 Hey, I'm Mathio Luca a Software Devloper focused on cool projects, scalable back-end architecture, and data-driven products.
-        </p>
-
-        <div class="flex gap-6">
-          <a href="/projects/" class="btn btn-primary">View Projects</a>
-        <a href="/contact/"  class="btn btn-outline">Get in Touch</a>
-        </div>
-      </section>
-
-      <!-- STACK -->
-      <section id="stack" class="py-24 px-6 max-w-6xl mx-auto">
-        <div class="divider"></div>
-
-        <h2 class="text-3xl md:text-4xl font-bold text-center text-[var(--ink)] mb-14">
-          Areas&nbsp;of&nbsp;Expertise
-        </h2>
-
-        <div class="grid gap-10 md:gap-12 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-          <div class="card"><h3>Languages</h3><p>TypeScript, Go, Python, React.</p></div>
-          <div class="card"><h3>Back-End</h3><p>Event-driven micro-services, gRPC, REST APIs, PostgreSQL, Redis.</p></div>
-          <div class="card"><h3>Cloud</h3><p>AWS Lambda &amp; ECS, Docker, Terraform, Vercel.</p></div>
-          <div class="card"><h3>Data &amp; AI</h3><p>Vector DBs, OpenAI API, data pipelines.</p></div>
-          <div class="card"><h3>Quality</h3><p>TDD, property-based testing, Playwright, CI/CD.</p></div>
-          <div class="card"><h3>Collaboration</h3><p>Agile practices, clear docs, mentoring.</p></div>
-        </div>
-      </section>
-    </main>
-
-    <footer class="py-10 text-center text-sm text-[#5d4c2a]">
-      © {year} Mathio&nbsp;Luca
-    </footer>
-
-    <!-- PARALLAX SCRIPT -->
-    <script is:inline>
-      const bg = document.querySelector('.painting-bg');
-      let rect;
-      window.addEventListener('resize', () => { rect = bg.getBoundingClientRect(); });
-      window.addEventListener('mousemove', (e) => {
-        rect = rect || bg.getBoundingClientRect();
-        const x = (e.clientX - rect.width  / 2) / rect.width;
-        const y = (e.clientY - rect.height / 2) / rect.height;
-        bg.style.transform = `translate(${x * 30}px, ${y * 30}px) scale(1.05)`;
-      });
-    </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js" integrity="sha512-Qlv6VSKh1gDKGoJbnyA5RMXYcvnpIqhO++MhIM2fStMcGT9i2T//tSwYFlcyoRRDcDZ+TYHpH8azBBCyhpSeqw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
-<script>
-  document.getElementById('resume-link').addEventListener('click', function(e) {
-    e.preventDefault();
-    
-    const pdfUrl = "https://mathiolucas-8mdfee1i4-mathiolucas-projects.vercel.app/lucaMMathioResume.pdf";
-    const fileName = "Lucas_Mathio_Resume.pdf";
-    
-    // Try using FileSaver.js
-    if (window.saveAs) {
-      try {
-        saveAs(pdfUrl, fileName);
-        return;
-      } catch (e) {
-        console.log("FileSaver.js failed", e);
-      }
+  <!-- ------------------------------------------------------------------
+       GLOBAL  STYLES
+  ------------------------------------------------------------------- -->
+  <style is:global>
+    /*  —— PALETTE ——  */
+    :root{
+      --gold:#c19e57;
+      --ink:#3c2f13;
+      --parch:#f4efe9;
+      --shadow:0 15px 35px -10px rgba(60,47,19,.25);
     }
-    
-    // Fallback to a new window with the file
-    window.open(pdfUrl, '_blank');
-  });
-</script>
-  </body>
+
+    /*  —— BASE ——  */
+    *,*:before,*:after{box-sizing:border-box;}
+    html{scroll-behavior:smooth;}
+    body{@apply bg-[var(--parch)] text-slate-800 antialiased;}
+
+    h1,h2,h3{font-family:"Playfair Display",serif; letter-spacing:-.01em;}
+
+    /*  —— HEADER ——  */
+    .logo{font-family:"Playfair Display",serif; font-weight:700;}
+    .nav-link{
+      @apply relative text-sm font-medium text-[var(--ink)] transition;
+    }
+    .nav-link::after{
+      content:""; position:absolute; left:0; bottom:-2px; width:0; height:2px;
+      background:var(--gold); transition:width .35s cubic-bezier(.4,0,.2,1);
+    }
+    .nav-link:hover::after{width:100%;}
+
+    /*  —— BACKGROUND PAINTING ——  */
+    .painting-bg{
+      background:url("/images/claude1.jpg") center/cover no-repeat;
+      opacity:.35; filter:grayscale(.15) blur(.6px);
+      position:absolute; inset:0; z-index:-1;
+      animation:bgDrift 55s ease-in-out infinite alternate;
+    }
+    @keyframes bgDrift{
+      0%{transform:scale(1.05) translate(0,0);}
+      50%{transform:scale(1.12) translate(-3%,-4%);}
+      100%{transform:scale(1.05) translate(2%,3%);}
+    }
+
+    /*  —— HERO ——  */
+    .hero-section{
+      @apply relative min-h-screen flex flex-col items-center justify-center text-center px-6;
+    }
+    .hero-title{
+      @apply text-5xl md:text-7xl font-black mb-6;
+      color:transparent;
+      background:linear-gradient(90deg,var(--ink),var(--gold));
+      -webkit-background-clip:text;background-clip:text;
+      animation:shine 6s ease-in-out infinite alternate;
+    }
+    @keyframes shine{
+      from{background-position:0% 50%;}
+      to{background-position:100% 50%;}
+    }
+    .hero-sub{@apply text-xl md:text-2xl max-w-2xl mx-auto mb-16 text-[#5d4c2a];}
+
+    /*  —— Scroll-Down Chevron ——  */
+    .chevron{
+      width:32px;height:32px;border-left:3px solid var(--gold);border-bottom:3px solid var(--gold);
+      transform:rotate(-45deg);margin:0 auto 4rem auto;
+      animation:bounce 2.8s infinite;
+    }
+    @keyframes bounce{
+      0%,20%,50%,80%,100%{transform:translateY(0) rotate(-45deg);}
+      40%{transform:translateY(8px) rotate(-45deg);}
+      60%{transform:translateY(4px) rotate(-45deg);}
+    }
+
+    /*  —— BUTTONS ——  */
+    .btn{
+      @apply inline-block px-8 py-3 rounded-full font-semibold transition shadow-md cursor-pointer;
+      box-shadow:var(--shadow);
+    }
+    .btn-primary{
+      @apply bg-[var(--gold)] text-white;
+    }
+    .btn-primary:hover{transform:translateY(-2px) scale(1.025);}
+    .btn-outline{
+      @apply border border-[var(--gold)] text-[var(--gold)];
+    }
+    .btn-outline:hover{
+      @apply bg-[var(--gold)] text-white;
+      transform:translateY(-2px) scale(1.025);
+    }
+
+    /*  —— SECTION REVEAL ——  */
+    .reveal{
+      opacity:0; transform:translateY(40px);
+      transition:opacity .8s ease-out, transform .8s ease-out;
+    }
+    .reveal.visible{
+      opacity:1; transform:translateY(0);
+    }
+
+    /*  —— CARDS ——  */
+    .card{
+      @apply bg-white/80 backdrop-blur-sm border border-[#d9d1c4] rounded-xl p-6 md:p-8 shadow-lg;
+      transition:transform .45s cubic-bezier(.34,1.56,.64,1);
+    }
+    .card h3{@apply font-semibold text-lg mb-2;}
+
+    /*  —— DIVIDER ——  */
+    .divider{
+      background:url('data:image/svg+xml;utf8,\
+        <svg xmlns="http://www.w3.org/2000/svg" width="300" height="20" viewBox="0 0 300 20" fill="none" stroke="%23c19e57" stroke-width="2"><path d="M1 10H99M201 10H299"/><circle cx="150" cy="10" r="4" fill="%23c19e57"/><path d="M120 10c5-9 55-9 60 0"/></svg>'
+      ) center/contain no-repeat;
+      width:100%;height:20px;margin:3rem auto;
+    }
+  </style>
+</head>
+
+<body class="flex flex-col min-h-screen">
+  <!-- ==============================================================
+       HEADER
+  ============================================================== -->
+  <header class="w-full px-6 py-4 flex justify-between items-center">
+    <span class="logo text-2xl text-[var(--ink)]">Mathio&nbsp;Luca</span>
+
+    <nav class="flex gap-6">
+      <a class="nav-link" href="/projects/">Projects</a>
+      <a class="nav-link" href="/contact/">Contact</a>
+      <a class="nav-link" href="https://mathiolucas-8mdfee1i4-mathiolucas-projects.vercel.app/lucaMMathioResume.pdf" id="resume-link">Resume</a>
+    </nav>
+  </header>
+
+  <!-- ==============================================================
+       MAIN
+  ============================================================== -->
+  <main class="flex-grow">
+    <!-- HERO -->
+    <section class="hero-section reveal">
+      <div class="painting-bg"></div>
+
+      <h1 class="hero-title">Building&nbsp;Reliable&nbsp;Systems</h1>
+      <p class="hero-sub">
+        👋 Hey, I'm Mathio Luca — a Software Developer focused on cool projects, scalable back-end architecture, and data-driven products.
+      </p>
+
+      <div class="flex gap-6">
+        <a href="/projects/" class="btn btn-primary">View Projects</a>
+        <a href="/contact/"  class="btn btn-outline">Get in Touch</a>
+      </div>
+
+      <div class="chevron"></div>
+    </section>
+
+    <!-- STACK -->
+    <section id="stack" class="py-24 px-6 max-w-6xl mx-auto reveal">
+      <div class="divider"></div>
+
+      <h2 class="text-3xl md:text-4xl font-bold text-center text-[var(--ink)] mb-14">
+        Areas&nbsp;of&nbsp;Expertise
+      </h2>
+
+      <div class="grid gap-10 md:gap-12 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+        <div class="card"><h3>Languages</h3><p>TypeScript, Go, Python, React.</p></div>
+        <div class="card"><h3>Back-End</h3><p>Event-driven micro-services, gRPC, REST APIs, PostgreSQL, Redis.</p></div>
+        <div class="card"><h3>Cloud</h3><p>AWS Lambda &amp; ECS, Docker, Terraform, Vercel.</p></div>
+        <div class="card"><h3>Data &amp; AI</h3><p>Vector DBs, OpenAI API, data pipelines.</p></div>
+        <div class="card"><h3>Quality</h3><p>TDD, property-based testing, Playwright, CI/CD.</p></div>
+        <div class="card"><h3>Collaboration</h3><p>Agile practices, clear docs, mentoring.</p></div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ==============================================================
+       FOOTER
+  ============================================================== -->
+  <footer class="py-10 text-center text-sm text-[#5d4c2a]">
+    © {year} Mathio Luca
+  </footer>
+
+  <!-- ==============================================================
+       SCRIPTS
+  ============================================================== -->
+
+  <!--  Parallax mouse-move on hero background ------------------- -->
+  <script is:inline>
+    const bg = document.querySelector('.painting-bg');
+    let rect;
+    window.addEventListener('resize', () => { rect = bg.getBoundingClientRect(); });
+    window.addEventListener('mousemove', (e) => {
+      rect = rect || bg.getBoundingClientRect();
+      const x = (e.clientX - rect.width  / 2) / rect.width;
+      const y = (e.clientY - rect.height / 2) / rect.height;
+      bg.style.transform = `translate(${x * 30}px, ${y * 30}px) scale(1.05)`;
+    });
+  </script>
+
+  <!--  Section-reveal IntersectionObserver ---------------------- -->
+  <script is:inline>
+    const reveals = document.querySelectorAll('.reveal');
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting){
+          entry.target.classList.add('visible');
+          io.unobserve(entry.target);
+        }
+      });
+    },{threshold:0.15});
+    reveals.forEach(el=>io.observe(el));
+  </script>
+
+  <!--  Vanilla-Tilt for cards (subtle 3D hover) ------------------ -->
+  <script src="https://unpkg.com/vanilla-tilt@1.7.2/dist/vanilla-tilt.min.js"></script>
+  <script is:inline>
+    VanillaTilt.init(document.querySelectorAll(".card"),{
+      max:15,
+      speed:400,
+      scale:1.05,
+      glare:true,
+      "max-glare":.2
+    });
+  </script>
+
+  <!--  FileSaver for resume download ---------------------------- -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"
+          integrity="sha512-Qlv6VSKh1gDKGoJbnyA5RMXYcvnpIqhO++MhIM2fStMcGT9i2T//tSwYFlcyoRRDcDZ+TYHpH8azBBCyhpSeqw=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+  <script is:inline>
+    document.getElementById('resume-link').addEventListener('click', (e)=>{
+      e.preventDefault();
+      const pdfUrl  = "https://mathiolucas-8mdfee1i4-mathiolucas-projects.vercel.app/lucaMMathioResume.pdf";
+      const fileName= "Lucas_Mathio_Resume.pdf";
+      if(window.saveAs){
+        try{ saveAs(pdfUrl, fileName); return; }catch(err){ console.log("FileSaver failed",err); }
+      }
+      window.open(pdfUrl,'_blank');
+    });
+  </script>
+</body>
 </html>
