@@ -1,10 +1,12 @@
 ---
+/* prettier-ignore */
 const links = [
-  { href: "/",          label: "Home"     },
+  { href: "/",  label: "Home"     },
   { href: "/projects/", label: "Projects" },
-  { href: "/resume/",   label: "Resume"   },
+  { href: "https://mathiolucas-8mdfee1i4-mathiolucas-projects.vercel.app/lucaMMathioResume.pdf", label: "Resume", download: true },
   { href: "/contact/",  label: "Contact"  },
 ];
+
 const current = Astro.url.pathname;
 ---
 
@@ -20,6 +22,9 @@ const current = Astro.url.pathname;
             href={l.href}
             class:list-active={current === l.href || current.startsWith(l.href)}
             class="nav-link"
+            target={l.download ? "_blank" : undefined}
+            rel={l.download ? "noopener noreferrer" : undefined}
+            download={l.download ? "" : undefined}
           >
             {l.label}
           </a>
@@ -41,6 +46,9 @@ const current = Astro.url.pathname;
           href={l.href}
           class:list-active={current === l.href || current.startsWith(l.href)}
           class="mobile-link"
+          target={l.download ? "_blank" : undefined}
+          rel={l.download ? "noopener noreferrer" : undefined}
+          download={l.download ? "" : undefined}
         >
           {l.label}
         </a>
@@ -49,12 +57,12 @@ const current = Astro.url.pathname;
   </ul>
 
   <style is:global>
+    /* Brighter gold just for the navbar */
+    .navbar{ --nav-gold:#FFD860; }
+
     /* ====== shell ====== */
     .navbar{
-      position:sticky;     /* keeps bar on-screen */
-      top:0;
-      z-index:50;
-      position:relative;   /* ↤ so the dropdown positions against it */
+      position:sticky;top:0;z-index:50;position:relative;
       background:rgba(var(--parch-rgb),.80);
       backdrop-filter:blur(6px);
       border-bottom:1px solid rgba(222,207,181,.6);
@@ -63,51 +71,53 @@ const current = Astro.url.pathname;
     .nav-container{@apply max-w-6xl mx-auto px-6 py-3 flex items-center justify-between;}
 
     /* ====== logo ====== */
-    .logo{font-family:"Playfair Display",serif;@apply text-xl md:text-2xl font-bold text-[var(--ink)];}
+    .logo{
+      font-family:"Playfair Display",serif;
+      color:var(--nav-gold);                     /* brighter gold */
+      @apply text-xl md:text-2xl font-bold;
+    }
 
     /* ====== desktop links ====== */
-    .links{ @apply gap-8 items-center; }           /* ← NO ‘hidden’ */
+    .links{@apply gap-8 items-center;}
     .nav-link{@apply relative text-sm font-medium text-[var(--ink)];}
     .nav-link::after{
       content:"";@apply absolute left-0 -bottom-0.5 h-0.5 w-0;
-      background:linear-gradient(90deg,var(--gold),var(--ink));
+      background:linear-gradient(90deg,var(--nav-gold),var(--ink));  /* brighter */
       transition:width .35s;
     }
     .nav-link:hover::after{width:100%;}
-    .list-active{color:var(--gold);}
+    .list-active{ color:var(--nav-gold); }        /* brighter */
 
     /* ====== hamburger ====== */
     .hamburger{@apply flex flex-col justify-between w-6 h-5;}
     .hamburger span{@apply block h-[3px] w-full bg-[var(--ink)] rounded transition-transform;}
-    .hamburger.open span:nth-child(1){@apply translate-y-[6px] rotate-45 bg-[var(--gold)];}
+    .hamburger.open span:nth-child(1){@apply translate-y-[6px] rotate-45 bg-[var(--nav-gold)];}
     .hamburger.open span:nth-child(2){@apply opacity-0;}
-    .hamburger.open span:nth-child(3){@apply -translate-y-[6px] -rotate-45 bg-[var(--gold)];}
+    .hamburger.open span:nth-child(3){@apply -translate-y-[6px] -rotate-45 bg-[var(--nav-gold)];}
 
     /* ====== mobile dropdown ====== */
     .mobile-menu{
-      position:absolute;left:0;top:100%;width:100%;
-      z-index:40;                               /* sits over page */
+      position:absolute;left:0;top:100%;width:100%;z-index:40;
       background:rgba(var(--parch-rgb),.95);
-      transform-origin:top;
-      transform:scaleY(0);
-      transition:transform .25s ease-out;
+      transform-origin:top;transform:scaleY(0);transition:transform .25s ease-out;
       @apply md:hidden flex flex-col gap-4 px-6 pb-6 pt-3;
     }
-    .mobile-menu.open{transform:scaleY(1);}
+    .mobile-menu.open{ transform:scaleY(1); }
     .mobile-link{@apply text-[var(--ink)] font-medium;}
-    .mobile-link.list-active{@apply text-[var(--gold)];}
+    .mobile-link.list-active{ color:var(--nav-gold); }
   </style>
 
   <script is:inline>
-    const burger=document.getElementById('hamburger');
-    const menu  =document.getElementById('mobile-menu');
+    const burger = document.getElementById('hamburger');
+    const menu   = document.getElementById('mobile-menu');
 
-    burger?.addEventListener('click',()=>{
+    burger?.addEventListener('click', () => {
       burger.classList.toggle('open');
       menu.classList.toggle('open');
     });
-    menu?.querySelectorAll('a').forEach(a=>{
-      a.addEventListener('click',()=>{
+
+    menu?.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
         burger.classList.remove('open');
         menu.classList.remove('open');
       });
