@@ -31,7 +31,7 @@ const preview =
   class="group relative block aspect-video overflow-hidden rounded-xl
          ring-1 ring-white/10 shadow-xl transition hover:ring-[#c19e57]/60"
 >
-  <!-- static thumbnail -->
+  <!-- Static thumbnail -->
   <img
     src={preview}
     alt={`${title} preview`}
@@ -40,11 +40,11 @@ const preview =
            transition-transform duration-300 group-hover:scale-105 group-hover:blur-[2px]"
   />
 
-  <!-- hover overlay -->
+  <!-- Hover overlay -->
   <div
-    class="pointer-events-none absolute inset-0 z-10 flex flex-col justify-between
-           bg-black/60 p-4 opacity-0 transition-opacity duration-300
-           group-hover:opacity-100"
+    class="absolute inset-0 z-10 flex flex-col justify-between bg-black/60
+           p-4 opacity-0 transition-opacity duration-300 group-hover:opacity-100
+           pointer-events-none"
   >
     {repo && (
       <a
@@ -53,7 +53,7 @@ const preview =
         rel="noopener noreferrer"
         class="pointer-events-auto self-end rounded-full bg-white/10 p-2
                transition hover:bg-white/20"
-        onClick={(e) => e.stopPropagation()}   /* keep parent link intact */
+        onClick={(e) => e.stopPropagation()}
       >
         <!-- GitHub icon -->
         <svg class="h-5 w-5 text-[#c19e57]" viewBox="0 0 24 24" fill="currentColor">
@@ -62,7 +62,7 @@ const preview =
       </a>
     )}
 
-    <!-- title + description -->
+    <!-- Title + description -->
     <div class="pointer-events-none">
       <h3 class="mb-1 text-lg font-bold text-white">{title}</h3>
       <p class="text-sm text-white/80">{description}</p>
