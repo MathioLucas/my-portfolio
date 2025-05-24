@@ -9,18 +9,21 @@
 */
 const { title, description, demo, repo, screenshot } = Astro.props;
 
-// Fallback screenshot (only used if you omit the prop)
 const preview =
-  screenshot ?? `https://image.thum.io/get/width/900/crop/675/noanimate/${encodeURIComponent(demo)}`;
+  screenshot ??
+  `https://image.thum.io/get/width/900/crop/675/noanimate/${encodeURIComponent(
+    demo,
+  )}`;
 ---
 <a
   href={demo}
   target="_blank"
   rel="noopener noreferrer"
   class="group relative block aspect-video rounded-xl overflow-hidden
-         shadow-xl ring-1 ring-white/10 hover:ring-[#c19e57]/60 transition"
+         shadow-xl ring-1 ring-white/10 hover:ring-[#c19e57]/60
+         transition-transform duration-300 hover:scale-105"
 >
-  <!-- static thumbnail ------------------------------------------------- -->
+  <!-- static thumbnail -->
   <img
     src={preview}
     alt={`${title} preview`}
@@ -33,7 +36,8 @@ const preview =
   <div
     class="absolute inset-0 z-10 flex flex-col justify-between p-4
            bg-black/60 opacity-0 group-hover:opacity-100
-           transition-opacity duration-300 pointer-events-none"
+           transition-opacity duration-300"
+           <!--  ⚠️ pointer-events:none REMOVED -->
   >
     <!-- GitHub badge -->
     <a
@@ -41,10 +45,11 @@ const preview =
       target="_blank"
       rel="noopener noreferrer"
       class="self-end p-2 bg-white/10 rounded-full
-             hover:bg-white/20 transition pointer-events-auto"
-      onClick={(e)=>e.stopPropagation()}   /* keep parent link intact */
+             transition-colors
+             text-white group-hover:text-[#c19e57] hover:bg-white/20"
+      onClick={(e) => e.stopPropagation()}  /* keep parent link intact */
     >
-      <svg class="w-5 h-5 text-[#c19e57]" viewBox="0 0 24 24" fill="currentColor">
+      <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
         <path d="M12 .3A12 12 0 0 0 0 12a12 12 0 0 0 8.21 11.44c.6.12.82-.25.82-.57
                  0-.28-.01-1.04-.02-2.05-3.34.72-4.05-1.6-4.05-1.6-.55-1.4-1.35-1.77-1.35-1.77
                  -1.1-.75.08-.74.08-.74 1.2.08 1.85 1.24 1.85 1.24 1.07 1.85 2.81 1.32 3.49 1
@@ -58,7 +63,7 @@ const preview =
     </a>
 
     <!-- title + description -->
-    <div class="pointer-events-none">
+    <div>
       <h3 class="text-lg font-bold text-white mb-1">{title}</h3>
       <p class="text-sm text-white/80">{description}</p>
     </div>
