@@ -3,14 +3,12 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
-<BaseLayout>
-  <section
-    class="relative overflow-hidden min-h-screen flex items-center justify-center px-6 py-16"
-  >
-    <!-- animated background -->
+<BaseLayout title="Contact – Mathio Luca">
+  <section class="relative overflow-hidden min-h-screen flex items-center justify-center px-6 py-16">
+    <!-- Animated background -->
     <div class="painting-bg absolute inset-0 -z-10"></div>
 
-    <!-- glass card -->
+    <!-- Glass card -->
     <div
       class="backdrop-blur-lg/10 bg-white/70 shadow-2xl rounded-3xl px-8 py-12
              max-w-2xl w-full flex flex-col items-center text-center"
@@ -20,10 +18,10 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       </h1>
 
       <p class="text-lg md:text-xl text-white/90 mb-8 max-w-md">
-        Want To Build Something Cool?
+        Want&nbsp;to&nbsp;build&nbsp;something&nbsp;cool?
       </p>
 
-      <!-- BUTTONS -->
+      <!-- CONTACT BUTTONS -->
       <div class="flex flex-col sm:flex-row gap-6 w-full sm:justify-center">
         <!-- Email -->
         <a href="mailto:luca.mathio1@gmail.com" class="contact-btn group">
@@ -62,8 +60,8 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         </a>
 
         <!-- GitHub -->
-        <a href="https://github.com/MathioLucas" target="_blank"
-           rel="noopener noreferrer" class="contact-btn group">
+        <a href="https://github.com/MathioLucas"
+           target="_blank" rel="noopener noreferrer" class="contact-btn group">
           <svg class="w-6 h-6 shrink-0 transition-colors"
                viewBox="0 0 24 24" fill="currentColor">
             <path d="M12 0C5.37 0 0 5.38 0 12a12 12 0 0 0 8.21 11.44c.6.11.82-.26.82-.58
@@ -81,72 +79,54 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     </div>
   </section>
 
-  <style>
-  /* === Animated background ============================================= */
+  <style is:global>
+    /* === Animated background ========================================== */
+    .painting-bg{
+      position:absolute;inset:0;
+      background:radial-gradient(120% 120% at 30% 20%, #1f2736 0%, #0f121b 50%, #000 100%);
+      animation:bgShift 20s ease-in-out infinite alternate;
+    }
+    @keyframes bgShift{
+      from{background-position:0 0;}
+      to  {background-position:100% 100%;}
+    }
+    .painting-bg::after{
+      content:"";position:absolute;inset:0;pointer-events:none;
+      background-image:
+        linear-gradient(transparent 95%, rgba(255,255,255,.06) 100%),
+        linear-gradient(90deg, transparent 95%, rgba(255,255,255,.06) 100%);
+      background-size:3rem 3rem;
+      mix-blend-mode:overlay;
+      animation:gridMove 60s linear infinite;
+    }
+    @keyframes gridMove{
+      from{transform:translate3d(0,0,0);}
+      to  {transform:translate3d(-3rem,-3rem,0);}
+    }
 
-  .painting-bg{
-    position: absolute;
-    inset: 0;
-    /* 1) Radial mesh gradient ------------------------------------------------ */
-    background:
-      radial-gradient(120% 120% at 30% 20%, #1f2736 0%, #0f121b 50%, #000000 100%);
-    animation: bgShift 20s ease-in-out infinite alternate;
-  }
-  @keyframes bgShift{
-    0%  {background-position: 0% 0%;}
-    100%{background-position: 100% 100%;}
-  }
-
-  /* 2) Subtle animated grid overlay --------------------------------------- */
-  .painting-bg::after{
-    content:"";
-    position:absolute; inset:0;
-    pointer-events:none;
-    background-image:
-      linear-gradient(transparent 95%, rgba(255,255,255,0.06) 100%),
-      linear-gradient(90deg, transparent 95%, rgba(255,255,255,0.06) 100%);
-    background-size: 3rem 3rem;
-    mix-blend-mode: overlay;
-    animation: gridMove 60s linear infinite;
-  }
-  @keyframes gridMove{
-    from{transform: translate3d(0,0,0);}
-    to  {transform: translate3d(-3rem,-3rem,0);}
-  }
-
-  /* === Buttons =========================================================== */
-
-  .contact-btn{
+    /* === Buttons ======================================================= */
+    .contact-btn{
       @apply relative flex items-center justify-center gap-3 px-6 py-4 rounded-full
-             font-semibold text-sm sm:text-base
-             bg-white/10 text-white shadow-lg backdrop-blur-md
-             transition-all duration-200;
+             font-semibold text-sm sm:text-base bg-white/10 text-white shadow-lg
+             backdrop-blur-md transition-all duration-200;
       border:1px solid rgba(255,255,255,0.15);
-  }
-  .contact-btn svg{ @apply text-[#c19e57]; }
-
-  /* neon glow on hover */
-  .contact-btn:hover{
-      transform: translateY(-2px) scale(1.03);
-      box-shadow: 0 0 12px 0 #c19e57, 0 0 6px 2px #c19e57 inset;
-  }
-  .contact-btn:hover svg{
-      color:#fff;
-  }
-
-  /* gold ring on hover – re-using your previous idea */
-  .contact-btn::after{
-      content:"";
-      position:absolute; inset:0; border-radius:inherit;
-      padding:1px;
-      background:linear-gradient(135deg,#c19e57 0%,#d5b16d 100%);
+    }
+    .contact-btn svg{ @apply text-[var(--gold)]; }
+    .contact-btn:hover{
+      transform:translateY(-2px) scale(1.03);
+      box-shadow:0 0 12px 0 var(--gold),0 0 6px 2px var(--gold) inset;
+    }
+    .contact-btn:hover svg{ color:#fff; }
+    .contact-btn::after{
+      content:"";position:absolute;inset:0;border-radius:inherit;padding:1px;
+      background:linear-gradient(135deg,var(--gold) 0%,#d5b16d 100%);
       -webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
-      -webkit-mask-composite:xor; mask-composite:exclude;
-      opacity:0; transition:opacity .2s;
-  }
-  .contact-btn:hover::after{opacity:1;}
+      -webkit-mask-composite:xor;mask-composite:exclude;
+      opacity:0;transition:opacity .2s;
+    }
+    .contact-btn:hover::after{opacity:1;}
 
-  /* === Text legibility tweaks =========================================== */
-  h1, p {color:#f0f0f0;}          /* brighter text on dark bg */
+    /* Headings & text brighter against dark bg */
+    h1,p{color:#f0f0f0;}
   </style>
 </BaseLayout>
