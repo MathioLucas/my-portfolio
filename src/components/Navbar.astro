@@ -1,13 +1,10 @@
 ---
-/* Nav links shown in order */
 const links = [
   { href: "/",          label: "Home"     },
   { href: "/projects/", label: "Projects" },
   { href: "/resume/",   label: "Resume"   },
   { href: "/contact/",  label: "Contact"  },
 ];
-
-/* Detect active link */
 const current = Astro.url.pathname;
 ---
 
@@ -30,7 +27,7 @@ const current = Astro.url.pathname;
       ))}
     </ul>
 
-    <!-- Hamburger (mobile only) -->
+    <!-- Hamburger -->
     <button id="hamburger" class="hamburger md:hidden" aria-label="Menu">
       <span></span><span></span><span></span>
     </button>
@@ -51,85 +48,62 @@ const current = Astro.url.pathname;
     ))}
   </ul>
 
-  <!-- ——— STYLES ——— -->
+  <!---------------------------  STYLES  --------------------------->
   <style is:global>
-    /* ------------------------------------------------------------
-       Layout container
-    ------------------------------------------------------------ */
+    /* ====== Shell ====== */
     .navbar{
-      /* custom colours done with plain CSS ↓ */
-      background-color: var(--parch);
-      border-color: rgba(222,207,181,.6);
+      position:sticky;top:0;z-index:50;
+      background:rgba(var(--parch-rgb),.80);          /* var created below */
+      backdrop-filter:blur(6px);
+      border-bottom:1px solid rgba(222,207,181,.6);
+      box-shadow:0 1px 2px rgba(0,0,0,.05);
+    }
+    .nav-container{@apply max-w-6xl mx-auto px-6 py-3 flex items-center justify-between;}
 
-      @apply sticky top-0 z-50 w-full backdrop-blur-sm
-             bg-opacity-80 border-b shadow-sm;
-    }
-    .nav-container{
-      @apply max-w-6xl mx-auto px-6 py-3 flex items-center justify-between;
-    }
+    /* ====== Logo ====== */
+    .logo{font-family:"Playfair Display",serif;@apply text-xl md:text-2xl font-bold text-[var(--ink)];}
 
-    /* ------------------------------------------------------------
-       Logo
-    ------------------------------------------------------------ */
-    .logo{
-      font-family:"Playfair Display",serif;
-      @apply text-xl md:text-2xl font-bold text-[var(--ink)] tracking-tight;
-    }
-
-    /* ------------------------------------------------------------
-       Desktop links
-    ------------------------------------------------------------ */
-    .links{ @apply hidden gap-8 items-center; }
-    .nav-link{
-      @apply relative text-sm font-medium text-[var(--ink)] transition-colors;
-    }
-    .nav-link::after{
-      content:"";position:absolute;left:0;bottom:-2px;width:0;height:2px;
+    /* ====== Desktop links ====== */
+    .links{@apply hidden gap-8 items-center;}
+    .nav-link{@apply relative text-sm font-medium text-[var(--ink)];}
+    .nav-link::after{content:"";@apply absolute left-0 -bottom-0.5 h-0.5 w-0;
       background:linear-gradient(90deg,var(--gold),var(--ink));
-      transition:width .35s cubic-bezier(.4,0,.2,1);
-    }
-    .nav-link:hover::after{ width:100%; }
-    .list-active{ color:var(--gold); }
+      transition:width .35s;}
+    .nav-link:hover::after{width:100%;}
+    .list-active{color:var(--gold);}
 
-    /* ------------------------------------------------------------
-       Hamburger icon
-    ------------------------------------------------------------ */
-    .hamburger{ @apply flex flex-col justify-between w-6 h-5 relative; }
-    .hamburger span{
-      @apply block h-[3px] w-full bg-[var(--ink)] rounded transition-transform;
-    }
-    .hamburger.open span:nth-child(1){ @apply translate-y-[6px] rotate-45 bg-[var(--gold)]; }
-    .hamburger.open span:nth-child(2){ @apply opacity-0; }
-    .hamburger.open span:nth-child(3){ @apply -translate-y-[6px] -rotate-45 bg-[var(--gold)]; }
+    /* ====== Hamburger ====== */
+    .hamburger{@apply flex flex-col justify-between w-6 h-5;}
+    .hamburger span{@apply block h-[3px] w-full bg-[var(--ink)] rounded transition-transform;}
+    .hamburger.open span:nth-child(1){@apply translate-y-[6px] rotate-45 bg-[var(--gold)];}
+    .hamburger.open span:nth-child(2){@apply opacity-0;}
+    .hamburger.open span:nth-child(3){@apply -translate-y-[6px] -rotate-45 bg-[var(--gold)];}
 
-    /* ------------------------------------------------------------
-       Mobile drop-down
-    ------------------------------------------------------------ */
+    /* ====== Mobile dropdown ====== */
     .mobile-menu{
-  background-color: var(--parch);
-
-  @apply md:hidden flex flex-col gap-4 px-6 pb-6 pt-3
-         bg-opacity-95 max-h-0 overflow-hidden
-         transition-all duration-300 ease-linear;
-  /* Only animate max-height */
-  transition-property: max-height;
-}
-.mobile-menu.open{ max-height:260px; }    /* enough for 4 links */
+      position:absolute;left:0;top:100%;width:100%;
+      background:rgba(var(--parch-rgb),.95);
+      transform-origin:top;
+      transform:scaleY(0);
+      transition:transform .25s ease-out;
+      @apply md:hidden flex flex-col gap-4 px-6 pb-6 pt-3;
+    }
+    .mobile-menu.open{transform:scaleY(1);}
+    .mobile-link{@apply text-[var(--ink)] font-medium;}
+    .mobile-link.list-active{@apply text-[var(--gold)];}
   </style>
 
-  <!-- ——— SCRIPT ——— -->
+  <!---------------------------  SCRIPT  --------------------------->
   <script is:inline>
-    const burger = document.getElementById('hamburger');
-    const menu   = document.getElementById('mobile-menu');
+    const burger=document.getElementById('hamburger');
+    const menu  =document.getElementById('mobile-menu');
 
-    burger?.addEventListener('click', () => {
+    burger?.addEventListener('click',()=>{
       burger.classList.toggle('open');
       menu.classList.toggle('open');
     });
-
-    /* Close menu after a link is clicked on mobile */
-    menu?.querySelectorAll('a').forEach(a => {
-      a.addEventListener('click', () => {
+    menu?.querySelectorAll('a').forEach(a=>{
+      a.addEventListener('click',()=>{
         burger.classList.remove('open');
         menu.classList.remove('open');
       });
