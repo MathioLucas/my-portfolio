@@ -96,22 +96,39 @@ const year = new Date().getFullYear();
     }
     
     /* —— BACKGROUND PAINTING —— */
-    .painting-bg{
-      background:url("/images/claude1.jpg") center/cover no-repeat;
-      opacity:.35;
-      filter:grayscale(.15) blur(.6px);
-      position:absolute;
-      inset:0;
-      z-index:-1;
-      animation:bgDrift 55s ease-in-out infinite alternate;
-    }
-    
-    @keyframes bgDrift{
-      0%{transform:scale(1.05) translate(0,0);}
-      50%{transform:scale(1.12) translate(-3%,-4%);}
-      100%{transform:scale(1.05) translate(2%,3%);}
-    }
-    
+    html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+
+.painting-bg {
+  background: url("/images/claude1.jpg") center / cover no-repeat;
+  opacity: 0.35;
+  filter: grayscale(0.15) blur(0.6px);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  animation: bgDrift 55s ease-in-out infinite alternate;
+  pointer-events: none; /* optional: makes sure it's not interactive */
+}
+
+@keyframes bgDrift {
+  0% {
+    transform: scale(1.05) translate(0, 0);
+  }
+  50% {
+    transform: scale(1.12) translate(-3%, -4%);
+  }
+  100% {
+    transform: scale(1.05) translate(2%, 3%);
+  }
+}
+
     /* —— HERO —— */
     .hero-section{
       position: relative;
