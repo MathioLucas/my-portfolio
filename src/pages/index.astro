@@ -1,7 +1,3 @@
----
-/* Astro front-matter */
-const year = new Date().getFullYear();
----
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,23 +7,178 @@ const year = new Date().getFullYear();
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
   
   <!-- GLOBAL STYLES -->
-  <style is:global>
+  <style>
     /* —— PALETTE —— */
     :root{
       --gold:#c19e57;
       --ink:#3c2f13;
       --parch:#f4efe9;
       --shadow:0 15px 35px -10px rgba(60,47,19,.25);
+      --tech-primary: #00d4ff;
+      --tech-secondary: #ff6b6b;
+      --tech-accent: #4ecdc4;
+      --tech-dark: #0a0a0a;
+      --tech-light: #1a1a1a;
     }
     
     /* —— BASE —— */
     *,*:before,*:after{box-sizing:border-box;}
     html{scroll-behavior:smooth;}
-    body{@apply bg-[var(--parch)] text-slate-800 antialiased;}
+    body{
+      background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+      color: #ffffff;
+      font-family: 'JetBrains Mono', monospace;
+      antialiased;
+      overflow-x: hidden;
+    }
     h1,h2,h3{font-family:"Playfair Display",serif;letter-spacing:-.01em;}
+    
+    /* —— ANIMATED BACKGROUND —— */
+    .tech-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: -1;
+      overflow: hidden;
+    }
+    
+    .grid-lines {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: 
+        linear-gradient(rgba(0, 212, 255, 0.1) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 212, 255, 0.1) 1px, transparent 1px);
+      background-size: 50px 50px;
+      animation: gridMove 20s linear infinite;
+    }
+    
+    @keyframes gridMove {
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(50px, 50px); }
+    }
+    
+    .floating-shapes {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+    }
+    
+    .shape {
+      position: absolute;
+      border: 1px solid;
+      border-radius: 50%;
+      animation: float 15s ease-in-out infinite;
+    }
+    
+    .shape:nth-child(1) {
+      width: 60px;
+      height: 60px;
+      top: 20%;
+      left: 10%;
+      border-color: var(--tech-primary);
+      animation-delay: 0s;
+      animation-duration: 12s;
+    }
+    
+    .shape:nth-child(2) {
+      width: 40px;
+      height: 40px;
+      top: 60%;
+      left: 80%;
+      border-color: var(--tech-secondary);
+      animation-delay: -3s;
+      animation-duration: 18s;
+    }
+    
+    .shape:nth-child(3) {
+      width: 80px;
+      height: 80px;
+      top: 80%;
+      left: 20%;
+      border-color: var(--tech-accent);
+      animation-delay: -6s;
+      animation-duration: 15s;
+    }
+    
+    .shape:nth-child(4) {
+      width: 30px;
+      height: 30px;
+      top: 30%;
+      left: 70%;
+      border-color: var(--gold);
+      animation-delay: -9s;
+      animation-duration: 20s;
+    }
+    
+    @keyframes float {
+      0%, 100% { 
+        transform: translateY(0px) translateX(0px) rotate(0deg);
+        opacity: 0.3;
+      }
+      25% { 
+        transform: translateY(-50px) translateX(30px) rotate(90deg);
+        opacity: 0.7;
+      }
+      50% { 
+        transform: translateY(-20px) translateX(-20px) rotate(180deg);
+        opacity: 0.5;
+      }
+      75% { 
+        transform: translateY(30px) translateX(-40px) rotate(270deg);
+        opacity: 0.8;
+      }
+    }
+    
+    .particles {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+    }
+    
+    .particle {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background: var(--tech-primary);
+      border-radius: 50%;
+      animation: particleFloat 25s linear infinite;
+    }
+    
+    @keyframes particleFloat {
+      0% {
+        transform: translateY(100vh) translateX(0);
+        opacity: 0;
+      }
+      10% {
+        opacity: 1;
+      }
+      90% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-100px) translateX(100px);
+        opacity: 0;
+      }
+    }
+    
+    /* Generate particles */
+    .particle:nth-child(1) { left: 10%; animation-delay: 0s; }
+    .particle:nth-child(2) { left: 20%; animation-delay: -5s; background: var(--tech-secondary); }
+    .particle:nth-child(3) { left: 30%; animation-delay: -10s; }
+    .particle:nth-child(4) { left: 40%; animation-delay: -15s; background: var(--tech-accent); }
+    .particle:nth-child(5) { left: 50%; animation-delay: -20s; }
+    .particle:nth-child(6) { left: 60%; animation-delay: -2s; background: var(--gold); }
+    .particle:nth-child(7) { left: 70%; animation-delay: -7s; }
+    .particle:nth-child(8) { left: 80%; animation-delay: -12s; background: var(--tech-secondary); }
+    .particle:nth-child(9) { left: 90%; animation-delay: -17s; }
     
     /* —— HEADER —— */
     header {
@@ -37,28 +188,28 @@ const year = new Date().getFullYear();
       right: 0;
       z-index: 50;
       backdrop-filter: blur(15px);
-      background: rgba(244, 239, 233, 0.85);
-      border-bottom: 1px solid rgba(193, 158, 87, 0.2);
+      background: rgba(10, 10, 10, 0.85);
+      border-bottom: 1px solid rgba(0, 212, 255, 0.2);
       transition: all 0.3s ease;
-      box-shadow: 0 4px 20px rgba(60, 47, 19, 0.08);
+      box-shadow: 0 4px 20px rgba(0, 212, 255, 0.08);
     }
     
     header:hover {
-      background: rgba(244, 239, 233, 0.95);
-      box-shadow: 0 8px 30px rgba(60, 47, 19, 0.12);
+      background: rgba(10, 10, 10, 0.95);
+      box-shadow: 0 8px 30px rgba(0, 212, 255, 0.12);
     }
     
     .logo{
       font-family:"Playfair Display",serif;
       font-weight:700;
-      color: var(--gold);
+      color: var(--tech-primary);
       transition: all 0.3s ease;
-      text-shadow: 0 2px 4px rgba(193, 158, 87, 0.3);
+      text-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
     }
     
     .logo:hover {
-      color: var(--ink);
-      text-shadow: 0 4px 8px rgba(60, 47, 19, 0.4);
+      color: var(--gold);
+      text-shadow: 0 0 20px rgba(193, 158, 87, 0.8);
       transform: scale(1.05);
     }
     
@@ -66,7 +217,7 @@ const year = new Date().getFullYear();
       position: relative;
       font-size: 0.875rem;
       font-weight: 500;
-      color: var(--ink);
+      color: #ffffff;
       transition: color 0.3s ease;
       text-decoration: none;
     }
@@ -78,12 +229,14 @@ const year = new Date().getFullYear();
       bottom:-2px;
       width:0;
       height:2px;
-      background:var(--gold);
+      background:var(--tech-primary);
       transition:width .35s cubic-bezier(.4,0,.2,1);
+      box-shadow: 0 0 10px var(--tech-primary);
     }
     
     .nav-link:hover{
-      color: var(--gold);
+      color: var(--tech-primary);
+      text-shadow: 0 0 8px rgba(0, 212, 255, 0.6);
     }
     
     .nav-link:hover::after{
@@ -91,30 +244,9 @@ const year = new Date().getFullYear();
     }
     
     .nav-link.active {
-      color: var(--gold);
+      color: var(--tech-primary);
       font-weight: 600;
-    }
-    
-    /* —— BACKGROUND PAINTING —— */
-    .painting-bg{
-      background-image: url("/images/claude1.jpg");
-      background-position: center;
-      background-size: cover;
-      background-repeat: no-repeat;
-      background-attachment: fixed;
-      opacity: 0.35;
-      filter: grayscale(0.15) blur(0.6px);
-      position: absolute;
-      inset: 0;
-      z-index: -1;
-      animation: bgDrift 55s ease-in-out infinite alternate;
-      will-change: transform;
-    }
-    
-    @keyframes bgDrift{
-      0%{transform:scale(1.05) translate(0,0);}
-      50%{transform:scale(1.12) translate(-3%,-4%);}
-      100%{transform:scale(1.05) translate(2%,3%);}
+      text-shadow: 0 0 8px rgba(0, 212, 255, 0.6);
     }
     
     /* —— HERO —— */
@@ -137,8 +269,8 @@ const year = new Date().getFullYear();
       left: 0;
       right: 0;
       bottom: 0;
-      background: radial-gradient(circle at 30% 20%, rgba(193, 158, 87, 0.15) 0%, transparent 50%),
-                  radial-gradient(circle at 70% 80%, rgba(60, 47, 19, 0.1) 0%, transparent 50%);
+      background: radial-gradient(circle at 30% 20%, rgba(0, 212, 255, 0.1) 0%, transparent 50%),
+                  radial-gradient(circle at 70% 80%, rgba(255, 107, 107, 0.1) 0%, transparent 50%);
       z-index: 1;
       pointer-events: none;
     }
@@ -153,12 +285,12 @@ const year = new Date().getFullYear();
       font-weight: 900;
       margin-bottom: 1.5rem;
       color: transparent;
-      background: linear-gradient(135deg, var(--ink) 0%, var(--gold) 45%, #d4af37 100%);
+      background: linear-gradient(135deg, var(--tech-primary) 0%, var(--tech-secondary) 45%, var(--gold) 100%);
       background-size: 200% 200%;
       -webkit-background-clip: text;
       background-clip: text;
       animation: shine 8s ease-in-out infinite alternate, float 6s ease-in-out infinite;
-      text-shadow: 0 8px 32px rgba(193, 158, 87, 0.3);
+      text-shadow: 0 0 30px rgba(0, 212, 255, 0.3);
       letter-spacing: -0.02em;
     }
     
@@ -182,9 +314,9 @@ const year = new Date().getFullYear();
       font-size: 1.25rem;
       max-width: 32rem;
       margin: 0 auto 4rem;
-      color: #5d4c2a;
+      color: #cccccc;
       line-height: 1.6;
-      text-shadow: 0 2px 4px rgba(60, 47, 19, 0.1);
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
       animation: fadeInUp 1s ease-out 0.5s both;
     }
     
@@ -209,18 +341,20 @@ const year = new Date().getFullYear();
     .chevron{
       width: 36px;
       height: 36px;
-      border-left: 3px solid var(--gold);
-      border-bottom: 3px solid var(--gold);
+      border-left: 3px solid var(--tech-primary);
+      border-bottom: 3px solid var(--tech-primary);
       transform: rotate(-45deg);
       margin: 2rem auto 4rem;
       animation: bounce 2.8s infinite, pulse 3s ease-in-out infinite alternate;
       opacity: 0.8;
       transition: all 0.3s ease;
+      box-shadow: 0 0 15px rgba(0, 212, 255, 0.4);
     }
     
     .chevron:hover {
       opacity: 1;
       transform: rotate(-45deg) scale(1.2);
+      box-shadow: 0 0 25px rgba(0, 212, 255, 0.8);
     }
     
     @keyframes pulse {
@@ -242,12 +376,12 @@ const year = new Date().getFullYear();
       font-weight: 600;
       font-size: 1rem;
       transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-      box-shadow: var(--shadow);
       text-decoration: none;
       cursor: pointer;
       position: relative;
       overflow: hidden;
       letter-spacing: 0.025em;
+      border: 2px solid;
     }
     
     .btn::before {
@@ -257,7 +391,7 @@ const year = new Date().getFullYear();
       left: -100%;
       width: 100%;
       height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
       transition: left 0.6s ease;
       z-index: 1;
     }
@@ -272,29 +406,31 @@ const year = new Date().getFullYear();
     }
     
     .btn-primary{
-      background: linear-gradient(135deg, var(--gold) 0%, #d4af37 100%);
+      background: linear-gradient(135deg, var(--tech-primary) 0%, var(--tech-accent) 100%);
       color: white;
-      border: 2px solid transparent;
+      border-color: var(--tech-primary);
+      box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
     }
     
     .btn-primary:hover{
       transform: translateY(-3px) scale(1.05);
-      box-shadow: 0 20px 40px -10px rgba(193, 158, 87, 0.4);
-      background: linear-gradient(135deg, #d4af37 0%, var(--gold) 100%);
+      box-shadow: 0 10px 30px rgba(0, 212, 255, 0.4);
+      background: linear-gradient(135deg, var(--tech-accent) 0%, var(--tech-primary) 100%);
     }
     
     .btn-outline{
-      border: 2px solid var(--gold);
-      color: var(--gold);
-      background: rgba(255, 255, 255, 0.1);
+      border-color: var(--tech-secondary);
+      color: var(--tech-secondary);
+      background: rgba(255, 107, 107, 0.1);
       backdrop-filter: blur(10px);
+      box-shadow: 0 0 20px rgba(255, 107, 107, 0.2);
     }
     
     .btn-outline:hover{
-      background: var(--gold);
+      background: var(--tech-secondary);
       color: white;
       transform: translateY(-3px) scale(1.05);
-      box-shadow: 0 20px 40px -10px rgba(193, 158, 87, 0.4);
+      box-shadow: 0 10px 30px rgba(255, 107, 107, 0.4);
     }
     
     .hero-buttons {
@@ -315,12 +451,12 @@ const year = new Date().getFullYear();
     
     /* —— CARDS —— */
     .card{
-      background: rgba(255,255,255,0.9);
+      background: rgba(26, 26, 26, 0.8);
       backdrop-filter: blur(12px);
-      border: 1px solid rgba(193, 158, 87, 0.2);
+      border: 1px solid rgba(0, 212, 255, 0.2);
       border-radius: 1rem;
       padding: 2rem;
-      box-shadow: 0 15px 35px rgba(60, 47, 19, 0.1);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
       transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
       position: relative;
       overflow: hidden;
@@ -333,7 +469,7 @@ const year = new Date().getFullYear();
       left: 0;
       right: 0;
       height: 3px;
-      background: linear-gradient(90deg, var(--gold), #d4af37);
+      background: linear-gradient(90deg, var(--tech-primary), var(--tech-accent));
       opacity: 0;
       transition: opacity 0.3s ease;
     }
@@ -344,8 +480,9 @@ const year = new Date().getFullYear();
     
     .card:hover {
       transform: translateY(-8px) scale(1.02);
-      box-shadow: 0 25px 50px rgba(60, 47, 19, 0.15);
-      border-color: var(--gold);
+      box-shadow: 0 20px 40px rgba(0, 212, 255, 0.15);
+      border-color: var(--tech-primary);
+      background: rgba(26, 26, 26, 0.95);
     }
     
     @media (min-width: 768px) {
@@ -358,16 +495,17 @@ const year = new Date().getFullYear();
       font-weight: 700;
       font-size: 1.25rem;
       margin-bottom: 0.75rem;
-      color: var(--ink);
+      color: var(--tech-primary);
       display: flex;
       align-items: center;
       gap: 0.5rem;
+      text-shadow: 0 0 10px rgba(0, 212, 255, 0.3);
     }
     
     .card h3::after {
       content: '→';
       font-size: 1rem;
-      color: var(--gold);
+      color: var(--tech-accent);
       opacity: 0;
       transform: translateX(-10px);
       transition: all 0.3s ease;
@@ -379,16 +517,18 @@ const year = new Date().getFullYear();
     }
     
     .card p {
-      color: #5d4c2a;
+      color: #cccccc;
       line-height: 1.6;
     }
     
     /* —— DIVIDER —— */
     .divider{
-      background:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="300" height="20" viewBox="0 0 300 20" fill="none" stroke="%23c19e57" stroke-width="2"><path d="M1 10H99M201 10H299"/><circle cx="150" cy="10" r="4" fill="%23c19e57"/><path d="M120 10c5-9 55-9 60 0"/></svg>') center/contain no-repeat;
-      width:100%;
-      height:20px;
-      margin:3rem auto;
+      background: linear-gradient(90deg, transparent, var(--tech-primary), transparent);
+      width: 100%;
+      height: 2px;
+      margin: 3rem auto;
+      border-radius: 1px;
+      box-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
     }
     
     /* —— LAYOUT —— */
@@ -436,6 +576,28 @@ const year = new Date().getFullYear();
 </head>
 
 <body class="flex flex-col min-h-screen">
+  <!-- ANIMATED TECH BACKGROUND -->
+  <div class="tech-bg">
+    <div class="grid-lines"></div>
+    <div class="floating-shapes">
+      <div class="shape"></div>
+      <div class="shape"></div>
+      <div class="shape"></div>
+      <div class="shape"></div>
+    </div>
+    <div class="particles">
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+    </div>
+  </div>
+
   <!-- HEADER -->
   <header class="w-full px-6 py-4 flex justify-between items-center">
     <a href="/" class="logo text-2xl">Mathio&nbsp;Luca</a>
@@ -450,7 +612,6 @@ const year = new Date().getFullYear();
   <!-- HERO -->
   <main class="flex-grow">
     <section class="hero-section reveal">
-      <div class="painting-bg"></div>
       <h1 class="hero-title">Building&nbsp;Reliable&nbsp;Systems</h1>
       <p class="hero-sub">
         👋 Hey, I'm Mathio Luca — a Software Developer focused on cool projects, scalable back-end architecture, and data-driven products.
@@ -465,7 +626,7 @@ const year = new Date().getFullYear();
     <!-- STACK -->
     <section id="stack" class="py-24 px-6 max-w-6xl mx-auto reveal">
       <div class="divider"></div>
-      <h2 class="text-3xl md:text-4xl font-bold text-center text-[var(--ink)] mb-14">
+      <h2 class="text-3xl md:text-4xl font-bold text-center text-white mb-14">
         Areas&nbsp;of&nbsp;Expertise
       </h2>
 
@@ -481,26 +642,16 @@ const year = new Date().getFullYear();
   </main>
 
   <!-- FOOTER -->
-  <footer class="py-10 text-center text-sm text-[#5d4c2a]">
-    © {year} Mathio&nbsp;Luca
+  <footer class="py-10 text-center text-sm" style="color: #888;">
+    © <span id="year"></span> Mathio&nbsp;Luca
   </footer>
 
   <!-- SCRIPTS -->
-  <!-- Parallax background -->
-  <script is:inline>
-    const bg = document.querySelector('.painting-bg');
-    let rect;
-    window.addEventListener('resize', () => { rect = bg.getBoundingClientRect(); });
-    window.addEventListener('mousemove', e => {
-      rect = rect || bg.getBoundingClientRect();
-      const x = (e.clientX - rect.width / 2) / rect.width;
-      const y = (e.clientY - rect.height / 2) / rect.height;
-      bg.style.transform = `translate(${x * 30}px, ${y * 30}px) scale(1.05)`;
-    });
-  </script>
-
-  <!-- Reveal on scroll -->
-  <script is:inline>
+  <script>
+    // Set current year
+    document.getElementById('year').textContent = new Date().getFullYear();
+    
+    // Reveal on scroll
     const reveals = document.querySelectorAll('.reveal');
     const io = new IntersectionObserver(entries => {
       entries.forEach(entry => {
@@ -511,31 +662,35 @@ const year = new Date().getFullYear();
       });
     }, { threshold: .15 });
     reveals.forEach(el => io.observe(el));
-  </script>
 
-  <!-- Vanilla-Tilt card hover -->
-  <script src="https://unpkg.com/vanilla-tilt@1.7.2/dist/vanilla-tilt.min.js"></script>
-  <script is:inline>
-    VanillaTilt.init(document.querySelectorAll('.card'), {
-      max: 15,
-      speed: 400,
-      scale: 1.05,
-      glare: true,
-      'max-glare': .2
+    // Interactive mouse following effect for particles
+    document.addEventListener('mousemove', (e) => {
+      const particles = document.querySelectorAll('.particle');
+      const mouseX = e.clientX / window.innerWidth;
+      const mouseY = e.clientY / window.innerHeight;
+      
+      particles.forEach((particle, index) => {
+        const speed = (index + 1) * 0.5;
+        const x = mouseX * speed * 10;
+        const y = mouseY * speed * 10;
+        particle.style.transform = `translate(${x}px, ${y}px)`;
+      });
     });
-  </script>
 
-  <!-- FileSaver for resume -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js" integrity="sha512-Qlv6VSKh1gDKGoJbnyA5RMXYcvnpIqhO++MhIM2fStMcGT9i2T//tSwYFlcyoRRDcDZ+TYHpH8azBBCyhpSeqw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <script is:inline>
+    // Resume download functionality
     document.getElementById('resume-link').addEventListener('click', e => {
       e.preventDefault();
       const pdfUrl = "https://mathiolucas-8mdfee1i4-mathiolucas-projects.vercel.app/lucaMMathioResume.pdf";
-      const fileName = "Lucas_Mathio_Resume.pdf";
-      if (window.saveAs) {
-        try { saveAs(pdfUrl, fileName); return; } catch (err) {}
-      }
       window.open(pdfUrl, '_blank');
+    });
+
+    // Add glitch effect on title hover
+    const title = document.querySelector('.hero-title');
+    title.addEventListener('mouseenter', () => {
+      title.style.textShadow = '0 0 5px #00d4ff, 0 0 10px #ff6b6b, 0 0 15px #4ecdc4';
+    });
+    title.addEventListener('mouseleave', () => {
+      title.style.textShadow = '0 0 30px rgba(0, 212, 255, 0.3)';
     });
   </script>
 </body>
